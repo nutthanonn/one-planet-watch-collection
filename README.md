@@ -10,8 +10,7 @@
   - antd
   - styled-components
 
-- backend (clean architecture)
+- backend
   - go
   - go-fiber
   - nosql
-# web-programming-project
