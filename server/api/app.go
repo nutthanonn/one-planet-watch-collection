@@ -1,28 +1,37 @@
 package main
 
 import (
+	"context"
+	"time"
+
 	"github.com/gofiber/fiber/v2"
-	"github.com/nutthanonn/go-clean-architecture/api/infrastructure/datastore"
-	"github.com/nutthanonn/go-clean-architecture/api/infrastructure/routers"
-	"github.com/nutthanonn/go-clean-architecture/pkg/registry"
+	"github.com/nutthanonn/web-programming-server/api/infrastructure/datastore"
+	"github.com/nutthanonn/web-programming-server/api/infrastructure/routers"
+	"github.com/nutthanonn/web-programming-server/pkg/registry"
 )
 
 func main() {
-	db := datastore.NewDB()
-	defer func() {
-		sqlDB, err := db.DB()
+	// connect to mongodb
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 
-		if err != nil {
+	client, err := datastore.Connect(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	defer func() {
+		if err := client.Disconnect(ctx); err != nil {
 			panic(err)
 		}
-
-		sqlDB.Close()
 	}()
+
+	quickStart := client.Database("go-nosql")
 
 	app := fiber.New()
 	api := app.Group("/api")
-	r := registry.NewRegistry(db)
-	routers.UserRouter(api, r.NewAppController())
+	r := registry.NewRegistry(quickStart)
+	routers.PostRouter(api, r.NewAppController())
 
 	app.Listen(":3000")
 }

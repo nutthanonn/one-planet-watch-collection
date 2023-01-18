@@ -1,19 +1,19 @@
 package datastore
 
 import (
-	"github.com/nutthanonn/go-clean-architecture/pkg/domain/entities"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	"context"
+
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func NewDB() *gorm.DB {
-	dsn := "root:password@tcp(127.0.0.1:3306)/goCleanArchitecture?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+// connect to mongodb
+
+func Connect(ctx context.Context) (*mongo.Client, error) {
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	db.AutoMigrate(&entities.User{})
-
-	return db
+	return client, nil
 }

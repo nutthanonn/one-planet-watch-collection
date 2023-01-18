@@ -1,7 +1,7 @@
 package controller
 
 type AppController struct {
-	User interface {
-		UserController
+	Post interface {
+		PostController
 	}
 }
