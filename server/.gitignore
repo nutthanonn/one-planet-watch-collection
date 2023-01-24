@@ -21,3 +21,4 @@
 go.work
 
 /api/gomon_spawn
+./db

@@ -1,7 +1,0 @@
-show tables
-show tablss
-show table
-db.createCollection("post")
-use go-nosql
-show dbs
-use admin
