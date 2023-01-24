@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"github.com/nutthanonn/web-programming-server/pkg/domain/models"
-	"github.com/nutthanonn/web-programming-server/pkg/usecase/interacter"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/domain/models"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/usecase/interacter"
 )
 
 type postController struct {

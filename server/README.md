@@ -9,8 +9,8 @@ This is a sample application for Golang clean architecture.
 ## Installation
 
 ```bash
-git clone https://github.com/nutthanonn/golang-clean-architecture.git
-cd golang-clean-architecture
+git clone https://github.com/nutthanonn/go-clean-architecture-nosql.git
+cd golang-clean-architecture-nosql
 go get
 ```
 
@@ -20,11 +20,4 @@ go get
 cd api
 npx go-mon app.go
 ```
-
-## Routes
-
-|    API Path    | Method |       What it does        |
-| :------------: | :----: | :-----------------------: |
-|   /api/users   |  GET   | Fetches the list of users |
-|   /api/users   |  POST  |        Create user        |
-| /api/users/:id | DELETE |        Delete user        |
+# go-clean-architecture-nosql

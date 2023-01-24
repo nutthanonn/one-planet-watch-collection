@@ -1,12 +1,12 @@
 package registry
 
 import (
-	ic "github.com/nutthanonn/web-programming-server/pkg/interface/controller"
-	ip "github.com/nutthanonn/web-programming-server/pkg/interface/presenter"
-	ir "github.com/nutthanonn/web-programming-server/pkg/interface/repository"
-	ui "github.com/nutthanonn/web-programming-server/pkg/usecase/interacter"
-	up "github.com/nutthanonn/web-programming-server/pkg/usecase/presenter"
-	ur "github.com/nutthanonn/web-programming-server/pkg/usecase/repository"
+	ic "github.com/nutthanonn/go-clean-architecture-nosql/pkg/interface/controller"
+	ip "github.com/nutthanonn/go-clean-architecture-nosql/pkg/interface/presenter"
+	ir "github.com/nutthanonn/go-clean-architecture-nosql/pkg/interface/repository"
+	ui "github.com/nutthanonn/go-clean-architecture-nosql/pkg/usecase/interacter"
+	up "github.com/nutthanonn/go-clean-architecture-nosql/pkg/usecase/presenter"
+	ur "github.com/nutthanonn/go-clean-architecture-nosql/pkg/usecase/repository"
 )
 
 func (r *registry) NewPostController() ic.PostController {

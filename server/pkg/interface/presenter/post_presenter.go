@@ -2,8 +2,8 @@ package presenter
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/nutthanonn/web-programming-server/pkg/domain/models"
-	"github.com/nutthanonn/web-programming-server/pkg/usecase/presenter"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/domain/models"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/usecase/presenter"
 )
 
 type postPresenter struct {
@@ -35,7 +35,7 @@ func (pp *postPresenter) PostSeccessResponse(post []*models.Post) *fiber.Map {
 func (pp *postPresenter) PostErrorResponse(err error) *fiber.Map {
 	return &fiber.Map{
 		"status":  false,
-		"message": "Post not found",
+		"message": "Post failed to retrieve",
 		"data":    nil,
 		"error":   err.Error(),
 	}

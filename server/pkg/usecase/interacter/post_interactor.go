@@ -1,9 +1,9 @@
 package interacter
 
 import (
-	"github.com/nutthanonn/web-programming-server/pkg/domain/models"
-	"github.com/nutthanonn/web-programming-server/pkg/usecase/presenter"
-	"github.com/nutthanonn/web-programming-server/pkg/usecase/repository"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/domain/models"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/usecase/presenter"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/usecase/repository"
 )
 
 type postInteractor struct {

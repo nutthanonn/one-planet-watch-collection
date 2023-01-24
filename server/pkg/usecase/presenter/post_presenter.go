@@ -2,7 +2,7 @@ package presenter
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/nutthanonn/web-programming-server/pkg/domain/models"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/domain/models"
 )
 
 type PostPresenter interface {

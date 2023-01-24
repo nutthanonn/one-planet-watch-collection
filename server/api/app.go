@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/nutthanonn/web-programming-server/api/infrastructure/datastore"
-	"github.com/nutthanonn/web-programming-server/api/infrastructure/routers"
-	"github.com/nutthanonn/web-programming-server/pkg/registry"
+	"github.com/nutthanonn/go-clean-architecture-nosql/api/infrastructure/datastore"
+	"github.com/nutthanonn/go-clean-architecture-nosql/api/infrastructure/routers"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/registry"
 )
 
 func main() {
@@ -29,9 +29,10 @@ func main() {
 	quickStart := client.Database("go-nosql")
 
 	app := fiber.New()
+
 	api := app.Group("/api")
 	r := registry.NewRegistry(quickStart)
 	routers.PostRouter(api, r.NewAppController())
 
-	app.Listen(":3000")
+	app.Listen(":8080")
 }

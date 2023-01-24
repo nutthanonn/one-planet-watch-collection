@@ -1,4 +1,4 @@
-module github.com/nutthanonn/web-programming-server
+module github.com/nutthanonn/go-clean-architecture-nosql
 
 go 1.17
 

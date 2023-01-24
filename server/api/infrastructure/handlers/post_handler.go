@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/nutthanonn/web-programming-server/pkg/interface/controller"
-	"github.com/nutthanonn/web-programming-server/pkg/interface/presenter"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/interface/controller"
+	"github.com/nutthanonn/go-clean-architecture-nosql/pkg/interface/presenter"
 )
 
 func GetPost(co controller.AppController) fiber.Handler {
