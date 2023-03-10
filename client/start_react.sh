@@ -8,5 +8,5 @@ else
     echo "$file not found."
     echo "Installing node modules..."
     npm install
-    npm start
+    npm run dev
 fi

@@ -1,23 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
-import { RocketFilled } from '@ant-design/icons';
+import Footer from './Footer';
+import Navigation from './Navigation';
 
 const Layout: React.FC = () => {
   return (
     <>
-      <Nav>
-        <div>
-          <RocketFilled style={{ fontSize: '100px', color: '#08c' }} />
-        </div>
-      </Nav>
+      <Navigation />
       <Outlet />
+      <Footer />
     </>
   );
 };
 
 export default Layout;
-
-const Nav = styled.nav`
-  display: inline-flex;
-`;

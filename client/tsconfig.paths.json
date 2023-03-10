@@ -16,7 +16,11 @@
       "@constants/*": ["./src/constants/*"],
       "@store/*": ["./src/store/*"],
       "@services/*": ["./src/services/*"],
-      "@conmon/*": ["./src/common/*"]
+      "@common/*": ["./src/common/*"],
+      "@mocks/*": ["./src/mocks/*"],
+      "@provider/*": ["./src/provider/*"],
+      "@gsap/*": ["./src/gsap/*"],
+      "@interfaces/*": ["./src/interfaces/*"]
     }
   }
 }
