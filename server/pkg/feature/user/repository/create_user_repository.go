@@ -38,6 +38,7 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 	user.UpdatedAt = time.Now()
 	user.Verified = false
 	user.Password = password_hasing
+	user.Role = "user"
 
 	res, err := user_collection.InsertOne(context.TODO(), user)
 
