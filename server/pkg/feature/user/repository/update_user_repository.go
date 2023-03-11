@@ -12,20 +12,24 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.User) error {
+func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.User) (*string, error) {
 	user_collection := ur.mongo_database.Collection("users")
 	verify_token, err := helper.VerifyToken(*bearerToken)
 
 	if updateData.Password == "" {
-		return errors.New("password is required")
+		return nil, errors.New("password is required")
+	}
+
+	if ok := helper.ValidateUsername(updateData.Username); !ok {
+		return nil, errors.New("username is not allowed")
 	}
 
 	if ok := helper.ValidateBase64(updateData.Image); !ok {
-		return errors.New("image is not base64")
+		return nil, errors.New("image is not base64")
 	}
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	user_id := verify_token["sub"].(string)
@@ -33,21 +37,27 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 	oldData, err := ur.GetUserById(user_id)
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	if !helper.Compare(updateData.Password, oldData.Password) {
-		return errors.New("password is not match")
+		return nil, errors.New("password is not match")
 	}
 
 	objectID, err := primitive.ObjectIDFromHex(user_id)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	updateData.UpdatedAt = time.Now()
+
 	updateData.Password = oldData.Password
 	updateData.Role = oldData.Role
+	updateData.Follower = oldData.Follower
+	updateData.Following = oldData.Following
+	updateData.CreateAt = oldData.CreateAt
+	updateData.Verified = oldData.Verified
+
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": updateData}
 
@@ -55,14 +65,20 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
-			return errors.New("user not found")
+			return nil, errors.New("user not found")
 		}
-		return err
+		return nil, err
 	}
 
 	if err := ur.redis_client.Del(user_id).Err(); err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	token, err := helper.GenerateToken(5*24*time.Hour, user_id, updateData.Email, updateData.Username, updateData.Verified)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &token, nil
 }

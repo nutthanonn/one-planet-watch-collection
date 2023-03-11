@@ -12,11 +12,12 @@ type userRepository struct {
 }
 
 type UserRepository interface {
-	CreateUser(user *models.User) (*string, error)
+	CreateUser(user *models.User) error
 	GetUserByUsername(username string) (*models.User, error)
 	VerifiedUser(ID string) error
-	UpdateUser(bearerToken *string, updateData *models.User) error
+	UpdateUser(bearerToken *string, updateData *models.User) (*string, error)
 	LoginUser(user *models.UserLogin) (*string, error)
+	GetUserById(ID string) (*models.User, error)
 }
 
 func NewUserRepository(mongo_database *mongo.Database, redis_client *redis.Client) UserRepository {

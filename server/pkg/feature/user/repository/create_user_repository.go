@@ -10,28 +10,32 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
+func (ur *userRepository) CreateUser(user *models.User) error {
 	user_collection := ur.mongo_database.Collection("users")
 
 	if user.Password == "" {
-		return nil, errors.New("password is required")
+		return errors.New("password is required")
 	}
 
 	if user.Email == "" {
-		return nil, errors.New("email is required")
+		return errors.New("email is required")
 	}
 
 	if user.Username == "" {
-		return nil, errors.New("username is required")
+		return errors.New("username is required")
+	}
+
+	if ok := helper.ValidateUsername(user.Username); !ok {
+		return errors.New("username is not allowed")
 	}
 
 	if _, err := ur.GetUserByUsername(user.Username); err == nil {
-		return nil, errors.New("username already exists")
+		return errors.New("username already exists")
 	}
 
 	password_hasing, err := helper.Hashing(user.Password)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	user.CreateAt = time.Now()
@@ -39,32 +43,32 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 	user.Verified = false
 	user.Password = password_hasing
 	user.Role = "user"
+	user.Follower = []primitive.ObjectID{}
+	user.Following = []primitive.ObjectID{}
 
 	res, err := user_collection.InsertOne(context.TODO(), user)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	insertedID, ok := res.InsertedID.(primitive.ObjectID)
 	if !ok {
-		return nil, errors.New("failed to convert inserted ID to ObjectID")
+		return errors.New("failed to convert inserted ID to ObjectID")
 	}
 	idString := insertedID.Hex()
-	token, err := helper.GenerateToken(5*time.Minute, idString, user.Email, user.Username)
+	token, err := helper.GenerateToken(5*time.Minute, idString, user.Email, user.Username, user.Verified)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	tokenResponse, err := helper.GenerateToken(5*24*time.Hour, idString, user.Email, user.Username)
-
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	link := helper.GetENV("SERVER_BASE_URL") + "/api/users/verify/" + token
 	helper.SendMail(user.Email, link)
 
-	return &tokenResponse, nil
+	return nil
 }

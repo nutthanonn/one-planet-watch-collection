@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/one-planet/cmd/infrastructure/handlers/user/handlers"
+	handlers "github.com/one-planet/cmd/infrastructure/handlers/user_handler"
 	"github.com/one-planet/pkg/feature/user/presenter"
 	"github.com/one-planet/pkg/feature/user/repository"
 )
@@ -15,8 +15,8 @@ func (ar *appRouter) UserRouter(api *gin.RouterGroup) {
 	api.GET("/users/profile/:username", user_handler.GetUser())
 	api.GET("/users/verify/:token", user_handler.VerifiedUser())
 
-	api.PUT("/users", user_handler.UpdateUser())
+	api.PUT("/users/update", user_handler.UpdateUser())
 
-	api.POST("/users", user_handler.CreateUser())
+	api.POST("/users/register", user_handler.CreateUser())
 	api.POST("/users/login", user_handler.LoginUser())
 }

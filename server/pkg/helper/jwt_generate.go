@@ -7,7 +7,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func GenerateToken(expirationTime time.Duration, userId, email, username string) (string, error) {
+func GenerateToken(expirationTime time.Duration, userId, email, username string, verify bool) (string, error) {
 	// Create a new token object
 	token := jwt.New(jwt.SigningMethodHS256)
 
@@ -16,6 +16,7 @@ func GenerateToken(expirationTime time.Duration, userId, email, username string)
 	claims["sub"] = userId
 	claims["email"] = email
 	claims["name"] = username
+	claims["verify"] = verify
 	claims["iat"] = time.Now().Unix()
 	claims["exp"] = time.Now().Add(expirationTime).Unix()
 

@@ -35,6 +35,7 @@ func main() {
 	api := app.Group("/api")
 	{
 		app_router.UserRouter(api)
+		app_router.FollowRouter(api)
 	}
 
 	app.Run(":8080")
