@@ -16,6 +16,7 @@ type User struct {
 	Follower   []User             `json:"follower" bson:"follower"`
 	Following  []User             `json:"following" bson:"following"`
 	Verified   bool               `json:"verified" bson:"verified"`
+	Role       string             `json:"role" bson:"role"`
 	MemberShip bool               `json:"membership" bson:"membership"`
 	CreateAt   time.Time          `json:"created_at,omitempty" bson:"created_at,omitempty"`
 	UpdatedAt  time.Time          `json:"updated_at,omitempty" bson:"updated_at,omitempty"`
