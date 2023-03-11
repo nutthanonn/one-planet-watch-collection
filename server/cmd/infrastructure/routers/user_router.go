@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/one-planet/cmd/infrastructure/user/handlers"
+	"github.com/one-planet/cmd/infrastructure/handlers/user/handlers"
 	"github.com/one-planet/pkg/feature/user/presenter"
 	"github.com/one-planet/pkg/feature/user/repository"
 )
