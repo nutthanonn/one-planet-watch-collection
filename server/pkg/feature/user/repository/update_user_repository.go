@@ -47,6 +47,7 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 
 	updateData.UpdatedAt = time.Now()
 	updateData.Password = oldData.Password
+	updateData.Role = oldData.Role
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": updateData}
 
