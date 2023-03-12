@@ -21,6 +21,7 @@ type UserHandler interface {
 	UpdateUser() gin.HandlerFunc
 	GetUser() gin.HandlerFunc
 	LoginUser() gin.HandlerFunc
+	SendMail() gin.HandlerFunc
 }
 
 func NewUserHandler(mongo_database *mongo.Database, redis_client *redis.Client, presenter presenter.UserPresenter, repository repository.UserRepository) UserHandler {
