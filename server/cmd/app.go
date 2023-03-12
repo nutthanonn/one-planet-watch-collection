@@ -35,6 +35,9 @@ func main() {
 	api := app.Group("/api")
 	{
 		app_router.UserRouter(api)
+		app_router.WatchRouter(api)
+
+		// autherize required
 		app_router.FollowRouter(api)
 	}
 
