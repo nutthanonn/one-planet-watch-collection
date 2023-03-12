@@ -63,6 +63,7 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 		return nil, err
 	}
 
+	returnToken, err := helper.GenerateToken(5*24*time.Hour, idString, user.Email, user.Username, user.Verified)
 	if err != nil {
 		return nil, err
 	}
@@ -70,5 +71,5 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 	link := helper.GetENV("SERVER_BASE_URL") + "/api/users/verify/" + token
 	helper.SendMail(user.Email, link)
 
-	return &user.Email, nil
+	return &returnToken, nil
 }
