@@ -57,6 +57,7 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 	updateData.Following = oldData.Following
 	updateData.CreateAt = oldData.CreateAt
 	updateData.Verified = oldData.Verified
+	updateData.MemberShip = oldData.MemberShip
 
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": updateData}
