@@ -16,12 +16,12 @@ func (uh *userHandler) CreateUser() gin.HandlerFunc {
 			return
 		}
 
-		email, err := uh.repository.CreateUser(user)
+		token, err := uh.repository.CreateUser(user)
 		if err != nil {
 			ctx.JSON(http.StatusBadRequest, uh.presenter.UserErrorResponse(err))
 			return
 		}
 
-		ctx.JSON(http.StatusOK, uh.presenter.CreateUserSuccessResponse(email))
+		ctx.JSON(http.StatusOK, uh.presenter.CreateUserSuccessResponse(token))
 	}
 }
