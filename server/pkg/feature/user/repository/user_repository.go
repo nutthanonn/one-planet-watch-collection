@@ -12,7 +12,7 @@ type userRepository struct {
 }
 
 type UserRepository interface {
-	CreateUser(user *models.User) error
+	CreateUser(user *models.User) (*string, error)
 	GetUserByUsername(username string) (*models.User, error)
 	VerifiedUser(ID string) error
 	UpdateUser(bearerToken *string, updateData *models.User) (*string, error)

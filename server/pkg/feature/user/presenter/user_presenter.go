@@ -20,6 +20,10 @@ type UserResponse struct {
 	CreateAt   time.Time            `json:"created_at,omitempty" bson:"created_at,omitempty"`
 }
 
+type CreateSuccess struct {
+	Email *string `json:"email,omitempty" bson:"email,omitempty"`
+}
+
 type UserToken struct {
 	Token *string `json:"token,omitempty" bson:"token,omitempty"`
 }
@@ -29,7 +33,7 @@ type userPresenter struct {
 
 type UserPresenter interface {
 	UserErrorResponse(err error) gin.H
-	CreateUserSuccessResponse() gin.H
+	CreateUserSuccessResponse(email *string) gin.H
 	UserSeccessResponse(user *models.User) gin.H
 	UpdateUserSeccessResponse(token *string) gin.H
 	UserLoginResponse(token *string) gin.H
@@ -39,11 +43,14 @@ func NewUserPresenneter() UserPresenter {
 	return &userPresenter{}
 }
 
-func (up *userPresenter) CreateUserSuccessResponse() gin.H {
+func (up *userPresenter) CreateUserSuccessResponse(email *string) gin.H {
 	return gin.H{
 		"status":  "success",
 		"error":   false,
 		"message": "User registration successful",
+		"data": &CreateSuccess{
+			Email: email,
+		},
 	}
 }
 
