@@ -1,0 +1,50 @@
+version: "3"
+services:
+  server:
+    container_name: "one-planet-server"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+    volumes:
+      - .:/go/src/github.com/nutthanon/one-planet-server
+    environment:
+      - MONGO_URL=mongodb://root:password@database:27017
+      - REDIS_URL=redis:6379
+      - GOOGLE_APP_PASSWORD=yjvpeeyofwhosguz
+      - JWT_SECRET=LJoDSv1ntuwkjyJXzGDev6LlVaX1cvE9AJsUnedAMVSJzFwTnB5RVA1KX6rE2Z6DEFhdpj1TZ_Z7r_Y1cSI19XTKPMydp7kJ6Fvf8Q4Ay3xF4xdmSd8hywNClUOSgRQh3NeEGl9HXSYf4nyC66gYHJqkflVWjNxyvRavcfomoccR1i1pQuj29dhLTXtzASIdLRPG_U6ia9FofdMM1LqBVNHdhJWzfJjmXNeO6ya3zKls6NwextQEzw8qVvGUiW7QJoEhmzFSo9Zfg_RJ0DN_5OBP3Z0JVbDV1RhSj2JibH8g3Ht8WNP5Lqp336dKELfdUuFGoO7TX9gaW1oWSHPpIQ
+      - SERVER_BASE_URL=http://localhost:8080
+      - CLIENT_BASE_URL=http://localhost:3000
+    networks:
+      - my-network
+
+  database:
+    image: mongo:latest
+    container_name: "database"
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=go-nosql
+      - MONGO_INITDB_USERNAME=root
+      - MONGO_INITDB_PASSWORD=password
+    networks:
+      - my-network
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    container_name: redisdb-container
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
