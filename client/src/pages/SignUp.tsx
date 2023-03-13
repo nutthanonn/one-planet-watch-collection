@@ -93,8 +93,6 @@ const Center = styled.section`
   height: 85vh;
   flex-direction: column;
   opacity: 0.8;
-  background-image: radial-gradient(#000 0.5px, #ffff 0.5px);
-  background-size: 30px 30px;
 `;
 
 const H1_Custom = styled(H1)`

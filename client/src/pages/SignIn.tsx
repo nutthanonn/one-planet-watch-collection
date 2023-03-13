@@ -1,25 +1,54 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TextField from '@common/TextField';
-import { Button, Input } from 'antd';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Button } from 'antd';
 import { H1, H6 } from '@common/Typography';
 import { ScreenSize } from '@common/ScreenSize';
+import PasswordField from '@common/PasswordField';
+import SignInAPI from '@api/Sign-in';
 
 interface UserForm {
-  email: string;
+  username: string;
   password: string;
 }
 
 const SignIn: React.FC = () => {
   const [userForm, setUserForm] = useState<UserForm>({
-    email: '',
+    username: '',
     password: '',
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [errForm, setErrForm] = useState<UserForm>({
+    username: '',
+    password: '',
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userForm);
+    setErrForm({
+      username: '',
+      password: '',
+    });
+
+    const res = await SignInAPI(userForm);
+
+    if (res.error === false) {
+      window.location.href = '/';
+    }
+
+    if (res.message === 'password is not match') {
+      setErrForm({
+        ...errForm,
+        password: 'Password is not match',
+      });
+    }
+
+    if (res.message === 'user not found') {
+      setErrForm({
+        ...errForm,
+        username: 'user not found',
+      });
+    }
   };
 
   return (
@@ -29,24 +58,21 @@ const SignIn: React.FC = () => {
       </div>
       <Form onSubmit={handleSubmit}>
         <TextField
-          placeholder='Email'
-          label='Email'
-          type='email'
-          onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}
+          placeholder='Username'
+          label='Username'
+          type='text'
+          onChange={(e) => setUserForm({ ...userForm, username: e.target.value })}
           required={true}
+          error={errForm.username}
+          value={userForm.username}
         />
-        <div>
-          <Label htmlFor='' err={false}>
-            Password
-          </Label>
-          <InputPassword
-            placeholder='Password'
-            iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-            type='password'
-            onChange={(e) => setUserForm({ ...userForm, password: e.target.value })}
-            required={true}
-          />
-        </div>
+        <PasswordField
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setUserForm({ ...userForm, password: e.target.value })
+          }
+          required={true}
+          error={errForm.password}
+        />
         <Forgot>
           <H6>Forgot password?</H6>
         </Forgot>
@@ -70,8 +96,7 @@ const Center = styled.section`
   height: 75vh;
   flex-direction: column;
   opacity: 0.8;
-  background-image: radial-gradient(#000 0.5px, #ffff 0.5px);
-  background-size: 30px 30px;
+  margin-top: 3rem;
 `;
 
 const H1_Custom = styled(H1)`
@@ -86,21 +111,6 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`;
-
-const InputPassword = styled(Input.Password)`
-  border-radius: 2px;
-  width: 25vw;
-  @media only screen and (max-width: ${ScreenSize.tablet}) {
-    width: 100%;
-  }
-`;
-
-const Label = styled.label`
-  display: block;
-  font-weight: 300;
-  color: ${(props: { err?: boolean }) => (props.err ? 'red' : 'black')};
-  padding-bottom: 0.25rem;
 `;
 
 const Forgot = styled.div`
