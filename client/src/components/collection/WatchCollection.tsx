@@ -2,36 +2,25 @@ import React from 'react';
 import CardCollection from './CardCollection';
 import styled from 'styled-components';
 import { H3 } from '@common/Typography';
-import { ROLEX_MOCK } from '@mocks/rolex_mock';
-import { RM_MOCK } from '@mocks/rm_mock';
-import { PATEK_PHILIPPE_MOCK } from '@mocks/patek_mock';
-import { DENIAL_WELLINGTON_MOCK } from '@mocks/denial_wellington';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
+import { WATCH_API } from '@mocks/watch_api';
+
+// interface IWatch {
+//   brand: string;
+//   models: {
+//     name: string;
+//     description: string;
+//     image: string;
+//   }[];
+// }
 
 const WatchCollection: React.FC = () => {
-  const Data = [
-    {
-      brand: 'Rolex',
-      mock: ROLEX_MOCK,
-    },
-    {
-      brand: 'Patek Philippe',
-      mock: PATEK_PHILIPPE_MOCK,
-    },
-    {
-      brand: 'Richard Mille',
-      mock: RM_MOCK,
-    },
-    {
-      brand: 'Denial Wellington',
-      mock: DENIAL_WELLINGTON_MOCK,
-    },
-  ];
+  // const [data, setData] = useState<IWatch[]>(WATCH_API);
 
   return (
     <>
-      {Data.map((item) => {
+      {WATCH_API.map((item) => {
         return (
           <div
             key={Math.floor(Math.random() * 100)
@@ -45,7 +34,7 @@ const WatchCollection: React.FC = () => {
               </span>
             </Heading>
             <Slide>
-              {item.mock.map((card, index) => {
+              {item.models.map((card, index) => {
                 return (
                   <CardCollection
                     description={card.description}
@@ -82,6 +71,10 @@ const Heading = styled(H3)`
   padding: 1.5rem 3rem;
   font-size: 2.5rem;
   font-weight: 600;
+  text-transform: lowercase;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 `;
 
 const Link = styled.a`

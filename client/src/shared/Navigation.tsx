@@ -1,37 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Container from './Container';
 import Logo from '@assets/images/one-planet-logo.svg';
 import { H3, H5 } from '@common/Typography';
-import { Input, AutoComplete } from 'antd';
-import { SearchOutlined, MenuOutlined } from '@ant-design/icons';
-import useDebounce from '@hooks/useDebounce';
+import { MenuOutlined } from '@ant-design/icons';
 import UserProfileDropdown from '@components/navigation/UserProfileDropdown';
 import ResourseDropdown from '@components/navigation/ResourseDropdown';
 import StatsDropdown from '@components/navigation/StatsDropdown';
 import { ScreenSize } from '@common/ScreenSize';
 import Sidebar from './Sidebar';
+import SearchBar from '@components/navigation/SearchBar';
 
 const Navigation: React.FC = () => {
-  const [searchValue, setValue] = useState<string>('');
-  const debouncedSearchValue = useDebounce(searchValue, 500);
-  const [options, setOptions] = useState([{ value: 'Rolex' }, { value: 'Patek Philippe' }]);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 
   const onClose = () => {
     setOpenDrawer(false);
-  };
-
-  useEffect(() => {
-    if (debouncedSearchValue) {
-      setOptions(options.filter((option) => option.value.includes(debouncedSearchValue)));
-    } else {
-      setOptions([{ value: 'Rolex' }, { value: 'Patek Philippe' }]);
-    }
-  }, [debouncedSearchValue]);
-
-  const handleSearch = (val: string) => {
-    setValue(val);
   };
 
   return (
@@ -48,23 +32,7 @@ const Navigation: React.FC = () => {
               <H3_Custom>OnePlanet</H3_Custom>
             </Link>
           </div>
-          <InputGroup compact>
-            <AutoComplete
-              style={{ width: '100%', fontWeight: 600 }}
-              size='large'
-              onSearch={handleSearch}
-              placeholder={
-                <div>
-                  <SearchOutlined />
-                  <PlaceholderFull>Search items, Collection, Account</PlaceholderFull>
-                  <PlaceholderShort>Search items</PlaceholderShort>
-                </div>
-              }
-              options={options}
-              notFoundContent={"Can't find anything"}
-              allowClear
-            />
-          </InputGroup>
+          <SearchBar />
           <Inline>
             <H5_Custom>
               <a href='/collection'>Collection</a>
@@ -127,28 +95,6 @@ const H3_Custom = styled(H3)`
 
   @media only screen and (max-width: ${ScreenSize.mobile}) {
     display: none;
-  }
-`;
-
-const PlaceholderFull = styled.span`
-  margin-left: 0.5rem;
-  @media only screen and (max-width: 500px) {
-    display: none;
-  }
-`;
-
-const PlaceholderShort = styled.span`
-  margin-left: 0.5rem;
-  display: none;
-  @media only screen and (max-width: 500px) {
-    display: inline;
-  }
-`;
-
-const InputGroup = styled(Input.Group)`
-  padding: 0 2.5rem;
-  @media only screen and (max-width: ${ScreenSize.mobile}) {
-    padding: 0;
   }
 `;
 

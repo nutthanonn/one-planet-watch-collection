@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'antd';
 import styled from 'styled-components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Skeleton from '@assets/images/skeleton-background.png';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const { Meta } = Card;
@@ -17,9 +18,18 @@ const CardCollection: React.FC<CardCollectionProps> = (props) => {
     <CardCustom
       hoverable
       style={{ minWidth: 250 }}
-      cover={<Img alt='example' src={props.img} width={200} draggable={false} effect='blur' />}
+      cover={
+        <Img
+          alt='example'
+          src={props.img}
+          width={200}
+          draggable={false}
+          effect='blur'
+          placeholderSrc={Skeleton}
+        />
+      }
     >
-      <Meta title={props.name} description={props.description} />
+      <Meta title={props.name} description={props.description} style={{ marginTop: 'auto' }} />
     </CardCustom>
   );
 };

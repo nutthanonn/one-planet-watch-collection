@@ -11,6 +11,7 @@ import Collection from '@pages/Collection';
 import Ranking from '@pages/Ranking';
 import UserProfile from '@pages/UserProfile';
 import IndividualCollection from '@pages/IndividualCollection';
+import NotFound from '@pages/NotFound';
 
 const App: React.FC = () => {
   return (
@@ -22,10 +23,10 @@ const App: React.FC = () => {
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/collection' element={<Collection />} />
           <Route path='/ranking' element={<Ranking />} />
-          <Route path='/user' element={<UserProfile />} />
+          <Route path='/:username' element={<UserProfile />} />
           <Route path='/model/:brand' element={<IndividualCollection />} />
-          {/* <Route path='/model/:brand?model=' element={<UserProfile />} /> */}
           <Route path='/sign-up/complete' element={<SuccessRegister />} />
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </AppProvider>

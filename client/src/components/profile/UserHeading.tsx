@@ -1,14 +1,25 @@
 import React from 'react';
 import { H3 } from '@common/Typography';
 import styled from 'styled-components';
+import { Divider, Tooltip } from 'antd';
 import { ShareAltOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
+import MemberShip from '@assets/images/membership.svg';
 
-const UserHeading: React.FC = () => {
+interface UserHeadingProps {
+  username?: string;
+  bio?: string;
+  membership?: boolean;
+  created_at?: Date;
+}
+
+const UserHeading: React.FC<UserHeadingProps> = (props) => {
   return (
     <Box>
       <Flex>
-        <Heading>Nutthanon Ape Yacht Club</Heading>
+        <Heading>
+          {props.username} &nbsp;&nbsp;&nbsp;
+          {props.membership ? <img src={MemberShip} alt='membership' width={30} /> : ''}
+        </Heading>
         <FlexChild>
           <Tooltip placement='top' title='share profile'>
             <ShareIcon />
@@ -17,21 +28,18 @@ const UserHeading: React.FC = () => {
       </Flex>
       <SubHeading>
         <div>
-          <Head>items&nbsp;</Head>
-          <HeadData>19K</HeadData>
+          <Head>Post&nbsp;&nbsp;</Head>
+          <HeadData>10</HeadData>
         </div>
         <div>
           <Head>Created&nbsp;</Head>
-          <HeadData>Aug 2021</HeadData>
+          <HeadData>{new Date(props.created_at ?? '').toDateString()}</HeadData>
         </div>
       </SubHeading>
       <Description>
-        <Paragraph>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde sint placeat sunt. Tempore
-          laboriosam, aperiam molestias obcaecati molestiae harum sint iusto saepe doloremque quod
-          adipisci rerum aliquam, delectus qui doloribus.
-        </Paragraph>
+        <Paragraph>{props.bio}</Paragraph>
       </Description>
+      <Divider />
     </Box>
   );
 };

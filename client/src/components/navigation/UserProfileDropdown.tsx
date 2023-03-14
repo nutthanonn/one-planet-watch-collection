@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserOutlined, HeartFilled, AppstoreFilled, FolderAddFilled } from '@ant-design/icons';
+import { UserOutlined, HeartFilled, FolderAddFilled } from '@ant-design/icons';
 import { Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import styled from 'styled-components';
@@ -21,19 +21,13 @@ const PROFILE_ITEMS: MenuProps['items'] = [
   },
   {
     key: '2',
-    label: 'My Collection',
-    style: DEFAILT_STYLE,
-    icon: <AppstoreFilled style={{ fontSize: 20 }} />,
-  },
-  {
-    key: '3',
     label: 'Favorites',
     style: DEFAILT_STYLE,
     icon: <HeartFilled style={{ fontSize: 20 }} />,
   },
   {
-    key: '4',
-    label: 'Create',
+    key: '3',
+    label: 'Create new post',
     style: DEFAILT_STYLE,
     icon: <FolderAddFilled style={{ fontSize: 20 }} />,
   },

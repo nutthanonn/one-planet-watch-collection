@@ -5,21 +5,24 @@ import SkeletonBackground from '@assets/images/skeleton-background.png';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface UserBackgroundProps {
-  backgroundSrc: string;
-  userImgSrc: string;
+  backgroundProfile?: string;
+  avatar?: string;
 }
 
-const UserBackground: React.FC = () => {
+const UserBackground: React.FC<UserBackgroundProps> = (props) => {
   return (
     <Box>
       <Img
-        src='https://source.unsplash.com/random/900x700/?fruit'
+        src={
+          props.backgroundProfile ||
+          'https://source.unsplash.com/random/1200x400/?background-texture'
+        }
         alt='user profile background'
         placeholderSrc={SkeletonBackground}
         draggable={false}
       />
       <UserImg
-        src='https://source.unsplash.com/random/900x700/?Animal'
+        src={props.avatar || 'https://source.unsplash.com/random/900x700/?Animal'}
         alt='user profile'
         placeholderSrc={SkeletonBackground}
         draggable={false}
@@ -49,4 +52,5 @@ const Img = styled(LazyLoadImage)`
   width: 100vw;
   height: 320px;
   object-fit: cover;
+  background-position: center;
 `;

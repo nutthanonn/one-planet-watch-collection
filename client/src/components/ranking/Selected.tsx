@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Radio, Select } from 'antd';
+import { Segmented, Select } from 'antd';
 import styled from 'styled-components';
 import { ScreenSize } from '@common/ScreenSize';
 
@@ -27,15 +27,12 @@ const Selected: React.FC = () => {
           { value: 'denial wellington', label: 'Denial Wellington' },
         ]}
       />
-      <Radio.Group value={radioValue} onChange={(e) => setRadioValue(e.target.value)} size='large'>
-        {BtnData.map((item, index) => {
-          return (
-            <RadioBtnCustom value={item} key={index}>
-              {item}
-            </RadioBtnCustom>
-          );
-        })}
-      </Radio.Group>
+      <Segment
+        options={BtnData}
+        value={radioValue}
+        onChange={(value) => setRadioValue(value.toLocaleString())}
+        size='large'
+      />
     </Box>
   );
 };
@@ -54,6 +51,9 @@ const Box = styled.div`
   }
 `;
 
-const RadioBtnCustom = styled(Radio.Button)`
+const Segment = styled(Segmented)`
   font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
