@@ -30,6 +30,5 @@ const Container = styled.div`
 
 const Heading_Custom = styled(H6)`
   font-weight: 300;
-
   color: ${(props: { pass?: boolean }) => (props.pass ? 'green' : 'red')};
 `;
