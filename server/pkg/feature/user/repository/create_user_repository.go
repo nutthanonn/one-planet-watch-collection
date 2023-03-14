@@ -17,6 +17,14 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 		return nil, errors.New("password is required")
 	}
 
+	if len(user.Password) > 20 {
+		return nil, errors.New("password is too long")
+	}
+
+	if len(user.Password) < 6 {
+		return nil, errors.New("password is too short")
+	}
+
 	if user.Email == "" {
 		return nil, errors.New("email is required")
 	}
