@@ -46,6 +46,7 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 	user.Follower = []primitive.ObjectID{}
 	user.Following = []primitive.ObjectID{}
 	user.Posts = []models.Post{}
+	user.Favorite_List = []primitive.ObjectID{}
 
 	res, err := user_collection.InsertOne(context.TODO(), user)
 

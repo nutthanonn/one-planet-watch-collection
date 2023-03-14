@@ -9,15 +9,16 @@ import (
 )
 
 type UserResponse struct {
-	Username   string               `json:"username,omitempty" bson:"username,omitempty"`
-	Email      string               `json:"email,omitempty" bson:"email,omitempty"`
-	Bio        string               `json:"bio,omitempty" bson:"bio,omitempty"`
-	Image      string               `json:"image,omitempty" bson:"image,omitempty"`
-	Follower   []primitive.ObjectID `json:"follower" bson:"follower"`
-	Following  []primitive.ObjectID `json:"following" bson:"following"`
-	Verified   bool                 `json:"verified" bson:"verified"`
-	MemberShip bool                 `json:"membership" bson:"membership"`
-	CreateAt   time.Time            `json:"created_at,omitempty" bson:"created_at,omitempty"`
+	Username          string               `json:"username,omitempty" bson:"username,omitempty"`
+	Email             string               `json:"email,omitempty" bson:"email,omitempty"`
+	Bio               string               `json:"bio,omitempty" bson:"bio,omitempty"`
+	Avatar            string               `json:"avatar,omitempty" bson:"avatar,omitempty"`
+	BackgroundProfile string               `json:"background_profile,omitempty" bson:"background_profile,omitempty"`
+	Follower          []primitive.ObjectID `json:"follower" bson:"follower"`
+	Following         []primitive.ObjectID `json:"following" bson:"following"`
+	Verified          bool                 `json:"verified" bson:"verified"`
+	MemberShip        bool                 `json:"membership" bson:"membership"`
+	CreateAt          time.Time            `json:"created_at,omitempty" bson:"created_at,omitempty"`
 }
 
 type UserToken struct {
@@ -76,15 +77,16 @@ func (up *userPresenter) UserSeccessResponse(user *models.User) gin.H {
 		"error":   false,
 		"message": "user data",
 		"data": &UserResponse{
-			Username:   user.Username,
-			Email:      user.Email,
-			Bio:        user.Bio,
-			Image:      user.Image,
-			Follower:   user.Follower,
-			Following:  user.Following,
-			Verified:   user.Verified,
-			MemberShip: user.MemberShip,
-			CreateAt:   user.CreateAt,
+			Username:          user.Username,
+			Email:             user.Email,
+			Bio:               user.Bio,
+			Avatar:            user.Avatar,
+			BackgroundProfile: user.BackgroundProfile,
+			Follower:          user.Follower,
+			Following:         user.Following,
+			Verified:          user.Verified,
+			MemberShip:        user.MemberShip,
+			CreateAt:          user.CreateAt,
 		},
 	}
 }

@@ -15,7 +15,7 @@ type Watches struct {
 	Image            string               `json:"image,omitempty" bson:"image,omitempty"`
 	Sub_images       []string             `json:"sub_images,omitempty" bson:"sub_images,omitempty"`
 	Sub_descriptions []string             `json:"sub_descriptions,omitempty" bson:"sub_descriptions,omitempty"`
-	Favorite         []primitive.ObjectID `json:"favorite,omitempty" bson:"favorite,omitempty"`
+	Favorite         []primitive.ObjectID `json:"favorite" bson:"favorite"`
 }
 
 type Watch_Log struct {
@@ -24,4 +24,9 @@ type Watch_Log struct {
 	User_id    primitive.ObjectID `json:"user_id,omitempty" bson:"user_id,omitempty"`
 	IsFavorite bool               `json:"is_favorite,omitempty" bson:"is_favorite,omitempty"`
 	CreateAt   time.Time          `json:"created_at,omitempty" bson:"created_at,omitempty"`
+}
+
+type WatchResponse struct {
+	Brand string     `json:"brand"`
+	Model []*Watches `json:"models"`
 }

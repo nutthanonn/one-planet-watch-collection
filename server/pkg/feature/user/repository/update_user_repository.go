@@ -19,12 +19,15 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 	if updateData.Password == "" {
 		return nil, errors.New("password is required")
 	}
-
 	if ok := helper.ValidateUsername(updateData.Username); !ok {
 		return nil, errors.New("username is not allowed")
 	}
 
-	if ok := helper.ValidateBase64(updateData.Image); !ok {
+	if ok := helper.ValidateBase64(updateData.Avatar); !ok && updateData.Avatar != "" {
+		return nil, errors.New("image is not base64")
+	}
+
+	if ok := helper.ValidateBase64(updateData.BackgroundProfile); !ok && updateData.BackgroundProfile != "" {
 		return nil, errors.New("image is not base64")
 	}
 
@@ -58,6 +61,8 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 	updateData.CreateAt = oldData.CreateAt
 	updateData.Verified = oldData.Verified
 	updateData.MemberShip = oldData.MemberShip
+	updateData.Posts = oldData.Posts
+	updateData.Favorite_List = oldData.Favorite_List
 
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": updateData}

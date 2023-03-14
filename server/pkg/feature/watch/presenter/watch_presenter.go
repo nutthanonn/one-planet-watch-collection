@@ -19,10 +19,32 @@ func NewWatchPresenter() WatchPresenter {
 
 func (wp *watchPresenter) WatchesSuccessResponse(data []*models.Watches) gin.H {
 
+	var watchResponse []*models.WatchResponse
+
+	for _, v := range data {
+		check := true
+		for _, k := range watchResponse {
+			if v.Brand == k.Brand {
+				check = false
+				if len(k.Model) < 20 {
+					k.Model = append(k.Model, v)
+					break
+				}
+			}
+		}
+
+		if check {
+			watchResponse = append(watchResponse, &models.WatchResponse{
+				Brand: v.Brand,
+				Model: []*models.Watches{v},
+			})
+		}
+	}
+
 	return gin.H{
 		"status": "success",
 		"error":  nil,
-		"data":   data,
+		"data":   watchResponse,
 	}
 }
 
