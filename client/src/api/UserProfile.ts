@@ -1,7 +1,8 @@
-import { UserProfileI } from '@interfaces/UserProfile';
 import axios from 'axios';
+import { SERVER_BASE_URL } from './defaultURL';
+import { UserProfileI } from '@interfaces/UserProfile';
 
-axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.baseURL = SERVER_BASE_URL;
 
 export interface UserProfileAPIResponse {
   data: UserProfileI;
@@ -14,11 +15,9 @@ const UserProfileAPI = async (username: string) => {
   const response: UserProfileAPIResponse = await axios
     .get<UserProfileAPIResponse>(`/users/profile/${username}`)
     .then((res) => {
-      console.log(res.data);
       return res.data;
     })
     .catch((err) => {
-      console.log(err);
       return err.response;
     });
 

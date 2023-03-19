@@ -4,23 +4,16 @@ import styled from 'styled-components';
 import { H3 } from '@common/Typography';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-import { WATCH_API } from '@mocks/watch_api';
+import { WatchData } from '@api/GetWatches';
 
-// interface IWatch {
-//   brand: string;
-//   models: {
-//     name: string;
-//     description: string;
-//     image: string;
-//   }[];
-// }
+interface WatchCollectionProps {
+  watch: WatchData[];
+}
 
-const WatchCollection: React.FC = () => {
-  // const [data, setData] = useState<IWatch[]>(WATCH_API);
-
+const WatchCollection: React.FC<WatchCollectionProps> = (props) => {
   return (
     <>
-      {WATCH_API.map((item) => {
+      {props.watch.map((item) => {
         return (
           <div
             key={Math.floor(Math.random() * 100)

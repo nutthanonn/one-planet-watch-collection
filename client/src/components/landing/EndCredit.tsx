@@ -15,7 +15,7 @@ const EndCredit: React.FC = () => {
       <Button
         block
         style={{ width: '50vw', color: 'white', background: 'black' }}
-        onClick={() => navigate('/sign-up')}
+        onClick={() => navigate('/register')}
       >
         Sign up for OnePlanet
       </Button>

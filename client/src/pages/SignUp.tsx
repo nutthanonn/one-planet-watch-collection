@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TextField from '@common/TextField';
-import { Button, Input, Popover } from 'antd';
+import { Button, Popover } from 'antd';
 import { H1, H6 } from '@common/Typography';
 import PasswordLevel from '@components/SignUp/PasswordLevel';
-import { InfoCircleFilled } from '@ant-design/icons';
+import { InfoCircleFilled, LoadingOutlined } from '@ant-design/icons';
 import PopoverContent from '@components/SignUp/PopoverContent';
+import SignUpAPI from '@api/Sign-up';
 import { ScreenSize } from '@common/ScreenSize';
+import PasswordField from '@common/PasswordField';
 
 interface UserForm {
   username: string;
@@ -16,7 +18,7 @@ interface UserForm {
 }
 
 const SignUp: React.FC = () => {
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [waiting, setWaiting] = useState<boolean>(false);
   const [userForm, setUserForm] = useState<UserForm>({
     username: '',
     email: '',
@@ -24,18 +26,55 @@ const SignUp: React.FC = () => {
     confirmPassword: '',
   });
 
+  const [errForm, setErrForm] = useState<UserForm>({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setWaiting(true);
+
+    if (userForm.password !== userForm.confirmPassword) {
+      setErrForm({ ...errForm, confirmPassword: 'Password does not match' });
+      setWaiting(false);
+      return;
+    }
+
+    const res = await SignUpAPI(userForm);
+
+    if (res.message === 'username already exists') {
+      setErrForm({ ...errForm, username: 'Username already exists' });
+      setWaiting(false);
+      return;
+    }
+
+    if (res.message === 'password is too short') {
+      setErrForm({ ...errForm, password: 'password is too short' });
+      setWaiting(false);
+      return;
+    }
+
+    if (res.error === false) {
+      window.location.href = '/register/complete';
+    }
+  };
+
   return (
     <Center>
       <div>
         <H1_Custom>Register</H1_Custom>
       </div>
-      <Form action=''>
+      <Form action='' onSubmit={handleSubmit}>
         <TextField
           placeholder='Username'
           label='Username'
           type='text'
           required={true}
           onChange={(e) => setUserForm({ ...userForm, username: e.target.value })}
+          error={errForm.username}
         />
         <TextField
           placeholder='Email'
@@ -43,24 +82,19 @@ const SignUp: React.FC = () => {
           type='email'
           required={true}
           onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}
+          error={errForm.email}
         />
-        <div>
-          <Label htmlFor='' err={false}>
-            Password *
-          </Label>
-          <InputPassword
-            placeholder='Password'
-            visibilityToggle={{ visible: passwordVisible, onVisibleChange: setPasswordVisible }}
-            required={true}
-            onChange={(e) => setUserForm({ ...userForm, password: e.target.value })}
-          />
-        </div>
+        <PasswordField
+          onChange={(e) => setUserForm({ ...userForm, password: e.target.value })}
+          error={errForm.password}
+        />
         <TextField
           placeholder='Confirm password'
           label='Confirm password'
           type='password'
           required={true}
           onChange={(e) => setUserForm({ ...userForm, confirmPassword: e.target.value })}
+          error={errForm.confirmPassword}
         />
         <PasswordLevel password={userForm.password} />
         <PasswordSuggest>
@@ -71,13 +105,12 @@ const SignUp: React.FC = () => {
             </Popover>
           </div>
         </PasswordSuggest>
-
-        <BtnCustom htmlType='submit'>Let&apos;s Roll</BtnCustom>
+        {waiting ? <LoadingOutlined /> : <BtnCustom htmlType='submit'>Let&apos;s Roll</BtnCustom>}
       </Form>
 
       <SuggessSignUp>
         <H6>Already have account?</H6>
-        <a href='/sign-in'>
+        <a href='/login'>
           <SpanSignUp>Sign in</SpanSignUp>
         </a>
       </SuggessSignUp>
@@ -107,22 +140,6 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`;
-
-const InputPassword = styled(Input.Password)`
-  border-radius: 2px;
-  width: 25vw;
-
-  @media only screen and (max-width: ${ScreenSize.tablet}) {
-    width: 100%;
-  }
-`;
-
-const Label = styled.label`
-  display: block;
-  font-weight: 300;
-  color: ${(props: { err?: boolean }) => (props.err ? 'red' : 'black')};
-  padding-bottom: 0.25rem;
 `;
 
 const PasswordSuggest = styled.div`

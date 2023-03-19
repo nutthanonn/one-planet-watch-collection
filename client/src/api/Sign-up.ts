@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { SERVER_BASE_URL } from './defaultURL';
 
-axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.baseURL = SERVER_BASE_URL;
 
 interface UserForm {
   username: string;
@@ -20,13 +21,23 @@ export interface SignUpResponse {
 }
 
 const SignUpAPI = async (props: UserForm) => {
-  const res = await axios.post<SignUpResponse>('/users/register', props, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const res: SignUpResponse = await axios
+    .post<SignUpResponse>(
+      '/users/register',
+      { username: props.username, email: props.email, password: props.password },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+    .then((res) => res.data)
+    .catch((err) => {
+      console.log(err.response.data);
+      return err.response.data;
+    });
 
-  return res.data;
+  return res;
 };
 
 export default SignUpAPI;

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { SERVER_BASE_URL } from './defaultURL';
 
 export interface Model {
   id: string;
@@ -32,7 +33,7 @@ export interface Response {
   status: string;
 }
 
-axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.baseURL = SERVER_BASE_URL;
 
 const SearchItemAPI = async (searchKey: string) => {
   const res: Response = await axios

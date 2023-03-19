@@ -38,7 +38,7 @@ const InputCustom = styled(Input)`
   border-radius: 2px;
   width: 25vw;
   @media only screen and (max-width: ${ScreenSize.tablet}) {
-    width: 17rem;
+    width: 20rem;
   }
   border-color: ${(props: { err?: string }) => (props.err ? 'red' : '')};
 `;

@@ -6,6 +6,9 @@ import { H1, H6 } from '@common/Typography';
 import { ScreenSize } from '@common/ScreenSize';
 import PasswordField from '@common/PasswordField';
 import SignInAPI from '@api/Sign-in';
+import useAuth from '@hooks/useAuth';
+import { Cookies } from 'react-cookie';
+import { LoadingOutlined } from '@ant-design/icons';
 
 interface UserForm {
   username: string;
@@ -13,6 +16,9 @@ interface UserForm {
 }
 
 const SignIn: React.FC = () => {
+  useAuth();
+  const cookie = new Cookies();
+  const [waiting, setWaiting] = useState<boolean>(false);
   const [userForm, setUserForm] = useState<UserForm>({
     username: '',
     password: '',
@@ -25,6 +31,7 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setWaiting(true);
     setErrForm({
       username: '',
       password: '',
@@ -32,15 +39,12 @@ const SignIn: React.FC = () => {
 
     const res = await SignInAPI(userForm);
 
-    if (res.error === false) {
-      window.location.href = '/';
-    }
-
     if (res.message === 'password is not match') {
       setErrForm({
         ...errForm,
         password: 'Password is not match',
       });
+      setWaiting(false);
     }
 
     if (res.message === 'user not found') {
@@ -48,6 +52,12 @@ const SignIn: React.FC = () => {
         ...errForm,
         username: 'user not found',
       });
+      setWaiting(false);
+    }
+
+    if (res.error === false) {
+      cookie.set('token', res.data?.token, { path: '/' });
+      window.location.href = `${userForm.username}`;
     }
   };
 
@@ -76,11 +86,11 @@ const SignIn: React.FC = () => {
         <Forgot>
           <H6>Forgot password?</H6>
         </Forgot>
-        <BtnCustom htmlType='submit'>Login</BtnCustom>
+        {waiting ? <LoadingOutlined /> : <BtnCustom htmlType='submit'>Login</BtnCustom>}
       </Form>
       <SuggessSignUp>
         <H6>Don&apos;t have an account?</H6>
-        <a href='/sign-up'>
+        <a href='/register'>
           <SpanSignUp>Sign up</SpanSignUp>
         </a>
       </SuggessSignUp>

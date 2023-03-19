@@ -19,7 +19,7 @@ const SearchItem: React.FC<NavigationChildProps> = (props) => {
   return (
     <Flex>
       <LazyLoadImage
-        src={props.avatar ?? 'https://source.unsplash.com/random/50x50/?Computer'}
+        src={props.avatar ?? 'http://xsgames.co/randomusers/avatar.php?g=pixel'}
         width={50}
         draggable={false}
         alt={props.username}
@@ -30,8 +30,8 @@ const SearchItem: React.FC<NavigationChildProps> = (props) => {
         {props.username}
         <br />
         <Inline>
-          <ShortestSpan short={true}>{props.bio}</ShortestSpan>
-          <ShortestSpan>&middot; {props.post ?? 0} Posts</ShortestSpan> &middot;
+          {props.bio ? <ShortestSpan short={true}>{props.bio} &middot;</ShortestSpan> : ''}
+          <ShortestSpan>{props.post ?? 0} Posts</ShortestSpan> &middot;
           <ShortestSpan>Followed by {props.follower?.length ?? 0}</ShortestSpan>
         </Inline>
       </Heading>

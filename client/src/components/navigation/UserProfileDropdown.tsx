@@ -3,6 +3,7 @@ import { UserOutlined, HeartFilled, FolderAddFilled } from '@ant-design/icons';
 import { Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const DEFAILT_STYLE: React.CSSProperties = {
   fontSize: '1rem',
@@ -15,7 +16,7 @@ const DEFAILT_STYLE: React.CSSProperties = {
 const PROFILE_ITEMS: MenuProps['items'] = [
   {
     key: '1',
-    label: 'Profile',
+    label: <a href='/login'>Profile</a>,
     style: DEFAILT_STYLE,
     icon: <UserOutlined style={{ fontSize: 20 }} />,
   },
@@ -34,9 +35,11 @@ const PROFILE_ITEMS: MenuProps['items'] = [
 ];
 
 const UserProfileDropdown: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <>
-      <Hover_div>
+      <Hover_div onClick={() => navigate('/login')}>
         <Dropdown menu={{ items: PROFILE_ITEMS }}>
           <UserCustom style={{ fontSize: 25 }} />
         </Dropdown>

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
+import { SERVER_BASE_URL } from './defaultURL';
 
-axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.baseURL = SERVER_BASE_URL;
 
 export interface SignInResponse {
   data?: {

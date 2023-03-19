@@ -18,7 +18,7 @@ const SuccessRegister: React.FC = () => {
         <Paragraph>
           If you don&apos;t see the email, please check your spam folder or <br />
           <br />
-          <Link href=''>resend the email</Link>
+          <Link href='https://mail.google.com/mail'>Go to email</Link>
         </Paragraph>
       </div>
     </Center>

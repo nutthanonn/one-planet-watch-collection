@@ -36,6 +36,10 @@ const SearchBar: React.FC = () => {
     }
   }, [debouncedSearchValue]);
 
+  const handleSelect = (data: string) => {
+    window.location.href = `/${data}`;
+  };
+
   return (
     <InputGroup>
       <AutoComplete
@@ -52,6 +56,7 @@ const SearchBar: React.FC = () => {
         options={options}
         notFoundContent={'No results found'}
         allowClear
+        onSelect={handleSelect}
       />
     </InputGroup>
   );

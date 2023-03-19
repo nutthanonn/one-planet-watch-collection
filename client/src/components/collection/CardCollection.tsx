@@ -22,14 +22,19 @@ const CardCollection: React.FC<CardCollectionProps> = (props) => {
         <Img
           alt='example'
           src={props.img}
-          width={200}
+          width={150}
+          height={200}
           draggable={false}
           effect='blur'
           placeholderSrc={Skeleton}
         />
       }
     >
-      <Meta title={props.name} description={props.description} style={{ marginTop: 'auto' }} />
+      <Meta
+        title={props.name}
+        description={props.description}
+        style={{ marginTop: 'auto', height: '50px' }}
+      />
     </CardCustom>
   );
 };

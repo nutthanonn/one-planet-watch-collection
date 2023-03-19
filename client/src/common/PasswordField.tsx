@@ -26,6 +26,7 @@ const PasswordField: React.FC<PasswordFieldProps> = (props) => {
         onChange={props.onChange}
         required={true}
         error={props.error}
+        minLength={6}
       />
       {props.error && <ErrorLabel>{props.error}</ErrorLabel>}
     </div>
