@@ -27,7 +27,7 @@ func (uh *userHandler) VerifiedUser() gin.HandlerFunc {
 			return
 		}
 
-		ctx.Redirect(http.StatusMovedPermanently, helper.GetENV("CLIENT_BASE_URL")+"/me")
+		ctx.Redirect(http.StatusMovedPermanently, helper.GetENV("CLIENT_BASE_URL")+"/login")
 
 		ctx.JSON(http.StatusMovedPermanently, gin.H{"message": "User verified successfully"})
 	}

@@ -31,6 +31,6 @@ func (jh *jwtHandler) JWTVerify() gin.HandlerFunc {
 			return
 		}
 
-		ctx.JSON(200, gin.H{"claims": claims})
+		ctx.JSON(200, gin.H{"claims": claims, "error": nil})
 	}
 }

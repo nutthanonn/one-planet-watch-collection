@@ -10,7 +10,7 @@ import (
 
 func (uh *userHandler) UpdateUser() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		var updateUser *models.User
+		var updateUser *models.UserUpdateModel
 
 		bearerToken, err := helper.BearerToken(ctx.GetHeader("Authorization"))
 

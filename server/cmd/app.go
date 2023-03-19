@@ -42,8 +42,9 @@ func main() {
 		// token required (bearer token)
 		app_router.JWTRouter(api)
 
-		// user verify account required (bearer token)
+		// verify account required and bearer token required
 		app_router.FollowRouter(api)
+		app_router.PostRouter(api)
 	}
 
 	app.Run(":8080")

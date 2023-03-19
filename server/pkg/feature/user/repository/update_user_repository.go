@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.User) (*string, error) {
+func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.UserUpdateModel) (*string, error) {
 	user_collection := ur.mongo_database.Collection("users")
 	verify_token, err := helper.VerifyToken(*bearerToken)
 
@@ -52,17 +52,8 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 		return nil, err
 	}
 
-	updateData.UpdatedAt = time.Now()
-
 	updateData.Password = oldData.Password
-	updateData.Role = oldData.Role
-	updateData.Follower = oldData.Follower
-	updateData.Following = oldData.Following
-	updateData.CreateAt = oldData.CreateAt
-	updateData.Verified = oldData.Verified
-	updateData.MemberShip = oldData.MemberShip
-	updateData.Posts = oldData.Posts
-	updateData.Favorite_List = oldData.Favorite_List
+	updateData.UpdatedAt = time.Now()
 
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": updateData}
@@ -80,7 +71,7 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 		return nil, err
 	}
 
-	token, err := helper.GenerateToken(5*24*time.Hour, user_id, updateData.Email, updateData.Username, updateData.Verified)
+	token, err := helper.GenerateToken(5*24*time.Hour, user_id, oldData.Email, updateData.Username, oldData.Verified)
 
 	if err != nil {
 		return nil, err

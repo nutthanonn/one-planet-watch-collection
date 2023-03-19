@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"errors"
+	"strings"
 	"time"
 
 	"github.com/one-planet/pkg/helper"
@@ -36,6 +37,8 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 	if ok := helper.ValidateUsername(user.Username); !ok {
 		return nil, errors.New("username is not allowed")
 	}
+
+	user.Username = strings.ToLower(user.Username)
 
 	if _, err := ur.GetUserByUsername(user.Username); err == nil {
 		return nil, errors.New("username already exists")
