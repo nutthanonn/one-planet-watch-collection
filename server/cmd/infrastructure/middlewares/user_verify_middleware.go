@@ -29,7 +29,7 @@ func UserVerifyMiddleware() gin.HandlerFunc {
 		}
 
 		if ok := token["verify"].(bool); !ok {
-			respondWithError(ctx, http.StatusUnauthorized, "Unauthorized")
+			respondWithError(ctx, http.StatusUnauthorized, "Unauthorized verify")
 			return
 		}
 
