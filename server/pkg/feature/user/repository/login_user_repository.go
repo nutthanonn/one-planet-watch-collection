@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"errors"
+	"strings"
 	"time"
 
 	"github.com/one-planet/pkg/helper"
@@ -13,6 +14,7 @@ import (
 func (ur *userRepository) LoginUser(user *models.UserLogin) (*string, error) {
 	user_collection := ur.mongo_database.Collection("users")
 	var userDB *models.User
+	user.Username = strings.ToLower(user.Username)
 
 	filter := bson.M{"username": user.Username}
 	if err := user_collection.FindOne(context.TODO(), filter).Decode(&userDB); err != nil {
