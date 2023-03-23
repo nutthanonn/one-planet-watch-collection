@@ -3,6 +3,7 @@ package handlers
 import (
 	"errors"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/one-planet/pkg/models"
@@ -17,6 +18,8 @@ func (uh *userHandler) LoginUser() gin.HandlerFunc {
 			ctx.JSON(http.StatusBadRequest, uh.presenter.UserErrorResponse(err))
 			return
 		}
+
+		user.Username = strings.ToLower(user.Username)
 
 		token, err := uh.repository.LoginUser(user)
 
