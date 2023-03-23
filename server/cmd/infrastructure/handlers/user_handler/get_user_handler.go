@@ -3,6 +3,7 @@ package handlers
 import (
 	"errors"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,6 +11,7 @@ import (
 func (uh *userHandler) GetUser() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		username := ctx.Param("username")
+		username = strings.ToLower(username)
 
 		user, err := uh.repository.GetUserByUsername(username)
 
