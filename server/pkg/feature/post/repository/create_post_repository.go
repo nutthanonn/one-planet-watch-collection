@@ -36,8 +36,14 @@ func (pr *postRepository) CreatePost(userID string, post *models.Post) error {
 	filter := bson.M{"_id": userObjectID}
 	update := bson.M{"$push": bson.M{"posts": post}}
 
-	if _, err := user_collection.UpdateOne(context.TODO(), filter, update); err != nil {
+	res, err := user_collection.UpdateOne(context.TODO(), filter, update)
+
+	if err != nil {
 		return err
+	}
+
+	if res.MatchedCount == 0 {
+		return errors.New("user not found")
 	}
 
 	return nil
