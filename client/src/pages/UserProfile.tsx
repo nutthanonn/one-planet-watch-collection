@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import UserBackground from '@components/profile/UserBackground';
 import UserHeading from '@components/profile/UserHeading';
@@ -17,9 +17,9 @@ const UserProfile: React.FC = () => {
     <Box>
       {profile?.username ? (
         <>
-          <UserBackground avatar={profile.avatar} backgroundProfile={profile.background_profile} />
+          <UserBackground avatar={profile.avatar} background_profile={profile.background_profile} />
           <UserHeading {...profile} isMe={claims?.name === profile?.username} />
-          <UserCollection />
+          <UserCollection posts={profile.posts} />
         </>
       ) : (
         <NotFound />

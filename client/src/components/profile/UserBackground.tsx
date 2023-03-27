@@ -5,7 +5,7 @@ import SkeletonBackground from '@assets/images/skeleton-background.png';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface UserBackgroundProps {
-  backgroundProfile?: string;
+  background_profile?: string;
   avatar?: string;
 }
 
@@ -14,7 +14,7 @@ const UserBackground: React.FC<UserBackgroundProps> = (props) => {
     <Box>
       <Img
         src={
-          props.backgroundProfile ||
+          props.background_profile ||
           'https://source.unsplash.com/random/1200x400/?background-texture'
         }
         alt='user profile background'
@@ -53,4 +53,6 @@ const Img = styled(LazyLoadImage)`
   height: 320px;
   object-fit: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;

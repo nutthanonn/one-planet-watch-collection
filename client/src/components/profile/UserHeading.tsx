@@ -2,12 +2,13 @@ import React from 'react';
 import { H3 } from '@common/Typography';
 import styled from 'styled-components';
 import { Divider, Tooltip } from 'antd';
-import { SettingOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { ShareAltOutlined } from '@ant-design/icons';
 import MemberShip from '@assets/images/membership.svg';
 import PostButton from './PostButton';
+import UpdateProfile from './update/UpdateProfile';
 
 interface UserHeadingProps {
-  username?: string;
+  username: string;
   bio?: string;
   membership?: boolean;
   created_at?: Date;
@@ -23,19 +24,17 @@ const UserHeading: React.FC<UserHeadingProps> = (props) => {
           {props.membership ? <img src={MemberShip} alt='membership' width={30} /> : ''}
         </Heading>
         <FlexChild>
-          <Tooltip placement='top' title='share profile'>
-            <ShareIcon />
-          </Tooltip>
           {props.isMe ? (
             <Inline>
-              <Tooltip placement='top' title='setting'>
-                <SettingIcon />
-              </Tooltip>
               <PostButton />
+              <UpdateProfile {...props} />
             </Inline>
           ) : (
             ''
           )}
+          <Tooltip placement='top' title='share profile'>
+            <ShareIcon />
+          </Tooltip>
         </FlexChild>
       </Flex>
       <SubHeading>
@@ -80,17 +79,6 @@ const Heading = styled(H3)`
 `;
 
 const ShareIcon = styled(ShareAltOutlined)`
-  font-size: 25px;
-  padding: 0.75rem;
-  border-radius: 50%;
-  cursor: pointer;
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  transition: all 0.1s ease-in-out;
-`;
-
-const SettingIcon = styled(SettingOutlined)`
   font-size: 25px;
   padding: 0.75rem;
   border-radius: 50%;

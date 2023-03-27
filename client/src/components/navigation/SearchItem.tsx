@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import SkeletonBackground from '@assets/images/skeleton-background.png';
+import { Post } from '@interfaces/UserProfile';
 
 interface NavigationChildProps {
   id: string;
   username: string;
   avatar?: string;
   bio?: string;
-  post?: string[];
+  post?: Post[];
   follower?: string[];
   following?: string[];
 }
@@ -31,7 +32,7 @@ const SearchItem: React.FC<NavigationChildProps> = (props) => {
         <br />
         <Inline>
           {props.bio ? <ShortestSpan short={true}>{props.bio} &middot;</ShortestSpan> : ''}
-          <ShortestSpan>{props.post ?? 0} Posts</ShortestSpan> &middot;
+          <ShortestSpan>{props.post?.length} Posts</ShortestSpan> &middot;
           <ShortestSpan>Followed by {props.follower?.length ?? 0}</ShortestSpan>
         </Inline>
       </Heading>

@@ -13,12 +13,18 @@ export interface Model {
   favorite: string[];
 }
 
+interface Post {
+  id: string;
+  images: string[];
+  description: string;
+}
+
 export interface User {
   id: string;
   username: string;
   avatar?: string;
   bio?: string;
-  post?: string[];
+  post?: Post[];
   follower?: string[];
   following?: string[];
 }
@@ -43,7 +49,6 @@ const SearchItemAPI = async (searchKey: string) => {
       return res.data;
     })
     .catch((err) => {
-      console.log(err);
       return err.response;
     });
 

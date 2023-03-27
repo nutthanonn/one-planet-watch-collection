@@ -33,7 +33,7 @@ const ResourseDropdown: React.FC = () => {
     <>
       <Hover_div>
         <Dropdown menu={{ items: RESOURCE_ITEMS }}>
-          <H5_Custom>Resouces</H5_Custom>
+          <H5_Custom>Request</H5_Custom>
         </Dropdown>
       </Hover_div>
     </>

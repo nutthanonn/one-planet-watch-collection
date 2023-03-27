@@ -1,9 +1,10 @@
-import React from 'react';
-import { UserOutlined, HeartFilled, FolderAddFilled } from '@ant-design/icons';
+import React, { useEffect } from 'react';
 import { Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { UserOutlined, HeartFilled, LogoutOutlined } from '@ant-design/icons';
+import { Cookies } from 'react-cookie';
 
 const DEFAILT_STYLE: React.CSSProperties = {
   fontSize: '1rem',
@@ -13,34 +14,52 @@ const DEFAILT_STYLE: React.CSSProperties = {
   fontWeight: 'bold',
 };
 
-const PROFILE_ITEMS: MenuProps['items'] = [
-  {
-    key: '1',
-    label: <a href='/login'>Profile</a>,
-    style: DEFAILT_STYLE,
-    icon: <UserOutlined style={{ fontSize: 20 }} />,
-  },
-  {
-    key: '2',
-    label: 'Favorites',
-    style: DEFAILT_STYLE,
-    icon: <HeartFilled style={{ fontSize: 20 }} />,
-  },
-  {
-    key: '3',
-    label: 'Create new post',
-    style: DEFAILT_STYLE,
-    icon: <FolderAddFilled style={{ fontSize: 20 }} />,
-  },
-];
-
 const UserProfileDropdown: React.FC = () => {
   const navigate = useNavigate();
+  const cookies = new Cookies();
+
+  const deleteCookie = () => {
+    cookies.remove('token');
+    navigate('/login');
+  };
+
+  const PROFILE_ITEMS: MenuProps['items'] = [
+    {
+      key: '1',
+      label: <div onClick={() => navigate('/login')}>Profile</div>,
+      style: DEFAILT_STYLE,
+      icon: <UserOutlined style={{ fontSize: 20 }} />,
+    },
+    {
+      key: '2',
+      label: 'Favorites',
+      style: DEFAILT_STYLE,
+      icon: <HeartFilled style={{ fontSize: 20 }} />,
+    },
+  ];
+
+  const [profileItem, setProfileItem] = React.useState<MenuProps['items']>(PROFILE_ITEMS);
+
+  useEffect(() => {
+    if (cookies.get('token')) {
+      setProfileItem([
+        ...PROFILE_ITEMS,
+        {
+          key: '4',
+          label: <div onClick={() => deleteCookie()}>Logout</div>,
+          style: DEFAILT_STYLE,
+          icon: <LogoutOutlined style={{ fontSize: 20 }} />,
+        },
+      ]);
+    } else {
+      setProfileItem(PROFILE_ITEMS);
+    }
+  }, []);
 
   return (
     <>
       <Hover_div onClick={() => navigate('/login')}>
-        <Dropdown menu={{ items: PROFILE_ITEMS }}>
+        <Dropdown menu={{ items: profileItem }}>
           <UserCustom style={{ fontSize: 25 }} />
         </Dropdown>
       </Hover_div>
