@@ -10,6 +10,7 @@ type Post struct {
 	ID          primitive.ObjectID `json:"id" bson:"id"`
 	Images      []string           `json:"images,omitempty" bson:"images,omitempty"`
 	Description string             `json:"description,omitempty" bson:"description,omitempty"`
+	CreateAt    time.Time          `json:"created_at,omitempty" bson:"created_at,omitempty"`
 }
 
 type User struct {

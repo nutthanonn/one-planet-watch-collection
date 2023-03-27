@@ -52,6 +52,8 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 	user.CreateAt = time.Now()
 	user.UpdatedAt = time.Now()
 	user.Verified = false
+	user.Avatar = "https://source.unsplash.com/random/1200x400/?background-texture"
+	user.BackgroundProfile = "https://source.unsplash.com/random/1200x400/?background-texture"
 	user.Password = password_hasing
 	user.Role = "user"
 	user.Follower = []primitive.ObjectID{}

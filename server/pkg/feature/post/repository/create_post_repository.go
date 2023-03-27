@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"errors"
+	"time"
 
 	"github.com/one-planet/pkg/helper"
 	"github.com/one-planet/pkg/models"
@@ -12,6 +13,7 @@ import (
 
 func (pr *postRepository) CreatePost(userID string, post *models.Post) error {
 	user_collection := pr.mongo_database.Collection("users")
+	post.CreateAt = time.Now()
 
 	userObjectID, err := primitive.ObjectIDFromHex(userID)
 	if err != nil {
@@ -34,7 +36,7 @@ func (pr *postRepository) CreatePost(userID string, post *models.Post) error {
 
 	post.ID = primitive.NewObjectID()
 	filter := bson.M{"_id": userObjectID}
-	update := bson.M{"$push": bson.M{"posts": post}}
+	update := bson.M{"$push": bson.M{"posts": bson.M{"$each": []models.Post{*post}, "$position": 0}}}
 
 	res, err := user_collection.UpdateOne(context.TODO(), filter, update)
 

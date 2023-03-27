@@ -52,6 +52,14 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 		return nil, err
 	}
 
+	if updateData.BackgroundProfile == "" {
+		updateData.BackgroundProfile = "https://source.unsplash.com/random/1200x400/?background-texture"
+	}
+
+	if updateData.Avatar == "" {
+		updateData.Avatar = "https://source.unsplash.com/random/1200x400/?background-texture"
+	}
+
 	updateData.Password = oldData.Password
 	updateData.UpdatedAt = time.Now()
 
