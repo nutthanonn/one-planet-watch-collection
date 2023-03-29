@@ -13,4 +13,5 @@ func (ar *appRouter) WatchRouter(api *gin.RouterGroup) {
 	watch_handler := handlers.NewWatchHandler(ar.mongo_database, ar.redis_client, watch_repository, watch_presenter)
 
 	api.GET("/watches", watch_handler.GetAllWatch())
+	api.GET("/watches/:id", watch_handler.GetWatchById())
 }

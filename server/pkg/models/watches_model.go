@@ -7,15 +7,15 @@ import (
 )
 
 type Watches struct {
-	ID               primitive.ObjectID   `json:"id,omitempty" bson:"_id,omitempty"`
-	Brand            string               `json:"brand,omitempty" bson:"brand,omitempty"`
-	Model            string               `json:"model,omitempty" bson:"model,omitempty"`
-	Name             string               `json:"name,omitempty" bson:"name,omitempty"`
-	Description      string               `json:"description,omitempty" bson:"description,omitempty"`
-	Image            string               `json:"image,omitempty" bson:"image,omitempty"`
-	Sub_images       []string             `json:"sub_images,omitempty" bson:"sub_images,omitempty"`
-	Sub_descriptions []string             `json:"sub_descriptions,omitempty" bson:"sub_descriptions,omitempty"`
-	Favorite         []primitive.ObjectID `json:"favorite" bson:"favorite"`
+	ID               primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
+	Brand            string             `json:"brand,omitempty" bson:"brand,omitempty"`
+	Model            string             `json:"model,omitempty" bson:"model,omitempty"`
+	Name             string             `json:"name,omitempty" bson:"name,omitempty"`
+	Description      string             `json:"description,omitempty" bson:"description,omitempty"`
+	Image            string             `json:"image,omitempty" bson:"image,omitempty"`
+	Sub_images       []string           `json:"sub_images,omitempty" bson:"sub_images,omitempty"`
+	Sub_descriptions []string           `json:"sub_descriptions,omitempty" bson:"sub_descriptions,omitempty"`
+	Favorite         int                `json:"favorite" bson:"favorite"`
 }
 
 type Watch_Log struct {

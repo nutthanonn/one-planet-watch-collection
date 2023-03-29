@@ -13,6 +13,7 @@ type watchRepository struct {
 
 type WatchRepository interface {
 	GetAllWatch() ([]*models.Watches, error)
+	GetWatchById(id string) (*models.Watches, error)
 }
 
 func NewWatchRepository(mongo_database *mongo.Database, redis_client *redis.Client) WatchRepository {
