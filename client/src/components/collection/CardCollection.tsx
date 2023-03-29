@@ -3,21 +3,26 @@ import { Card } from 'antd';
 import styled from 'styled-components';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Skeleton from '@assets/images/skeleton-background.png';
+import { useNavigate } from 'react-router-dom';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const { Meta } = Card;
 
 interface CardCollectionProps {
+  id: string;
   img: string;
   name: string;
   description: string;
 }
 
 const CardCollection: React.FC<CardCollectionProps> = (props) => {
+  const navigate = useNavigate();
+
   return (
     <CardCustom
       hoverable
       style={{ minWidth: 250 }}
+      onClick={() => navigate(`/model/${props.id}`)}
       cover={
         <Img
           alt='example'

@@ -15,11 +15,7 @@ const WatchCollection: React.FC<WatchCollectionProps> = (props) => {
     <>
       {props.watch.map((item) => {
         return (
-          <div
-            key={Math.floor(Math.random() * 100)
-              .toString()
-              .slice(0, 5)}
-          >
+          <div key={item.brand}>
             <Heading>
               {item.brand} Collection
               <span>
@@ -33,6 +29,7 @@ const WatchCollection: React.FC<WatchCollectionProps> = (props) => {
                     description={card.description}
                     name={card.name}
                     img={card.image}
+                    id={card.id}
                     key={index}
                   />
                 );
