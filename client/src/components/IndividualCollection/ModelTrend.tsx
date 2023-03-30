@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import { LikeOutlined } from '@ant-design/icons';
 import { H5 } from '@common/Typography';
 
+interface ModelTrendProps {
+  favorite?: number;
+}
+
 const MOCK = {
-  like: 273589,
-  percent: 10.32,
+  favorite: 273589,
+  percent: parseFloat((Math.random() * (100.0 - -100.0) + -100.0).toFixed(4)),
 };
 
-const ModelTrend: React.FC = () => {
+const ModelTrend: React.FC<ModelTrendProps> = (props) => {
   return (
     <div>
       <FlexCol>
@@ -18,11 +22,11 @@ const ModelTrend: React.FC = () => {
         </Inline>
         <Inline>
           <LikeOutlined style={{ fontSize: '1.75rem' }} />
-          <HeadingNumber>{MOCK.like.toLocaleString()}</HeadingNumber>
+          <HeadingNumber>{props.favorite?.toLocaleString()}</HeadingNumber>
         </Inline>
         <div>
           <Inline>
-            <span style={{ fontSize: '1rem' }}>Trend title</span>
+            <span style={{ fontSize: '1rem' }}>Trending</span>
             <Inline>
               <Triangle percent={MOCK.percent} />
               <TrendPercent percent={MOCK.percent}>{MOCK.percent}%</TrendPercent>
@@ -69,7 +73,7 @@ const Triangle = styled.div`
   clip-path: ${(props: { percent: number }) =>
     props.percent > 0 ? 'polygon(50% 20%, 0 70%, 100% 70%)' : 'polygon(51% 90%, 0 40%, 100% 40%);'};
 
-  background-color: ${(props: { percent: number }) => (props.percent > 0 ? '#52c41a' : '#ff4d4f')};
+  background-color: ${(props: { percent: number }) => (props.percent >= 0 ? '#52c41a' : '#ff4d4f')};
   width: 10px;
   height: 10px;
 `;
@@ -77,5 +81,5 @@ const Triangle = styled.div`
 const TrendPercent = styled.h6`
   margin: 0;
   font-size: 1rem;
-  color: ${(props: { percent: number }) => (props.percent > 0 ? '#52c41a' : '#ff4d4f')};
+  color: ${(props: { percent: number }) => (props.percent >= 0 ? '#52c41a' : '#ff4d4f')};
 `;

@@ -4,34 +4,36 @@ import SkeletonBackground from '@assets/images/skeleton-background.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { H3 } from '@common/Typography';
-import useWatchById from '@hooks/useWatchById';
 import { Spin } from 'antd';
 import { ScreenSize } from '@common/ScreenSize';
 
-// const WATCH = {
-//   image:
-//     'https://content.rolex.com/dam/2022-11/upright-cc/m226658-0001.png?impolicy=main-configurator&amp;imwidth=900',
-//   name: 'Yacht-Master 42',
-//   description: 'Oyster, 42 mm, yellow gold',
-// };
+export interface IndividualCollectionHeaderProps {
+  id?: string;
+  brand?: string;
+  model?: string;
+  name?: string;
+  description?: string;
+  image?: string;
+  sub_images?: string[];
+  sub_descriptions?: string[];
+  favorite?: number;
+}
 
-const IndividualCollectionHeader: React.FC = () => {
-  const { watch } = useWatchById();
-
+const IndividualCollectionHeader: React.FC<IndividualCollectionHeaderProps> = (props) => {
   return (
     <div>
-      {watch ? (
+      {props.image ? (
         <Center>
           <Img
-            src={watch.image}
-            alt={watch.id}
+            src={props.image}
+            alt={props.id}
             placeholderSrc={SkeletonBackground}
             draggable={false}
             width={350}
           />
           <Box>
-            <Heading>{watch.name}</Heading>
-            <Paragraph>{watch.description}</Paragraph>
+            <Heading>{props.name}</Heading>
+            <Paragraph>{props.description}</Paragraph>
           </Box>
         </Center>
       ) : (
