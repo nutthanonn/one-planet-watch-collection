@@ -19,11 +19,11 @@ type Watches struct {
 }
 
 type Watch_Log struct {
-	ID         primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
-	Watch_id   primitive.ObjectID `json:"watches_id,omitempty" bson:"watches_id,omitempty"`
-	User_id    primitive.ObjectID `json:"user_id,omitempty" bson:"user_id,omitempty"`
-	IsFavorite bool               `json:"is_favorite,omitempty" bson:"is_favorite,omitempty"`
-	CreateAt   time.Time          `json:"created_at,omitempty" bson:"created_at,omitempty"`
+	ID       primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
+	Watch_id primitive.ObjectID `json:"watches_id,omitempty" bson:"watches_id,omitempty"`
+	User_id  primitive.ObjectID `json:"user_id,omitempty" bson:"user_id,omitempty"`
+	Favorite bool               `json:"favorite,omitempty" bson:"favorite,omitempty"`
+	CreateAt time.Time          `json:"created_at,omitempty" bson:"created_at,omitempty"`
 }
 
 type WatchResponse struct {

@@ -45,6 +45,7 @@ func main() {
 		// verify account required and bearer token required
 		app_router.FollowRouter(api)
 		app_router.PostRouter(api)
+		app_router.FavoriteRouter(api)
 	}
 
 	app.Run(":8080")
