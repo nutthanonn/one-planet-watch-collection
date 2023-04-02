@@ -11,6 +11,7 @@ export interface UserProfileI {
   background_profile?: string;
   follower: string[];
   following: string[];
+  favorite_list: string[];
   verified: boolean;
   membership: boolean;
   posts: Post[];

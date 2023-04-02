@@ -73,8 +73,9 @@ const SignUp: React.FC = () => {
           label='Username'
           type='text'
           required={true}
-          onChange={(e) => setUserForm({ ...userForm, username: e.target.value })}
+          onChange={(e) => setUserForm({ ...userForm, username: e.target.value.toLowerCase() })}
           error={errForm.username}
+          value={userForm.username}
         />
         <TextField
           placeholder='Email'
@@ -83,6 +84,7 @@ const SignUp: React.FC = () => {
           required={true}
           onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}
           error={errForm.email}
+          value={userForm.email}
         />
         <PasswordField
           onChange={(e) => setUserForm({ ...userForm, password: e.target.value })}
@@ -95,6 +97,7 @@ const SignUp: React.FC = () => {
           required={true}
           onChange={(e) => setUserForm({ ...userForm, confirmPassword: e.target.value })}
           error={errForm.confirmPassword}
+          value={userForm.confirmPassword}
         />
         <PasswordLevel password={userForm.password} />
         <PasswordSuggest>

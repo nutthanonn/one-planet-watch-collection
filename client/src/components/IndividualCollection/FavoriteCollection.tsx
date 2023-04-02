@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { H5 } from '@common/Typography';
 import { HeartFilled } from '@ant-design/icons';
 import { ScreenSize } from '@common/ScreenSize';
+import { MyProfileImpl } from '@store/MyProfileStore';
+import { observer } from 'mobx-react';
+import AddFavoriteAPI from '@api/AddFavorite';
 
-const FavoriteCollection: React.FC = () => {
+interface FavoriteCollectionProps {
+  my_store: MyProfileImpl;
+  watch_id?: string;
+}
+
+const FavoriteCollection: React.FC<FavoriteCollectionProps> = observer((props) => {
   const [isActive, setIsActive] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (props.my_store.favorite_list.includes(props.watch_id as string)) {
+      setIsActive(true);
+    }
+  }, [props.my_store.favorite_list, props.watch_id]);
 
   const handleClick = () => {
     setIsActive(!isActive);
+    if (isActive) {
+      props.my_store.removeFavoriteList(props.watch_id as string);
+    } else {
+      props.my_store.addFavoriteList(props.watch_id as string);
+    }
+    AddFavoriteAPI(props.watch_id as string);
   };
 
   return (
     <Inline onClick={handleClick}>
-      <HeartIcon active={isActive} />
+      <HeartIcon is_fav={`${isActive}`} />
       <Heading>Add to your collection list</Heading>
     </Inline>
   );
-};
+});
 
 export default FavoriteCollection;
 
@@ -39,7 +59,7 @@ const Inline = styled.div`
 `;
 
 const HeartIcon = styled(HeartFilled)`
-  color: ${(props: { active: boolean }) => (props.active ? '#ff4d4f' : 'black')};
+  color: ${(props: { is_fav: string }) => (props.is_fav === 'true' ? '#ff4d4f' : '#000000')};
   font-size: 25px;
   cursor: pointer;
   &:hover {

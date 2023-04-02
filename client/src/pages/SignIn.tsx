@@ -71,7 +71,7 @@ const SignIn: React.FC = () => {
           placeholder='Username'
           label='Username'
           type='text'
-          onChange={(e) => setUserForm({ ...userForm, username: e.target.value })}
+          onChange={(e) => setUserForm({ ...userForm, username: e.target.value.toLowerCase() })}
           required={true}
           error={errForm.username}
           value={userForm.username}

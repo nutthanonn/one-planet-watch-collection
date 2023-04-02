@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 const PostPopup: React.FC = () => {
   return <div>PostPopup</div>;
@@ -7,4 +7,4 @@ const PostPopup: React.FC = () => {
 
 export default PostPopup;
 
-const Center = styled.div``;
+// const Center = styled.div``;

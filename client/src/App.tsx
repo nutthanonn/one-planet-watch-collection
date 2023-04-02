@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Home from '@pages/Home';
 import Layout from '@shared/Layout';
 import { Routes, Route } from 'react-router-dom';
@@ -12,8 +12,20 @@ import Ranking from '@pages/Ranking';
 import UserProfile from '@pages/UserProfile';
 import IndividualCollection from '@pages/IndividualCollection';
 import NotFound from '@pages/NotFound';
+import { MyProfileImpl } from '@store/MyProfileStore';
+import useVerifyToken from '@hooks/useVerifyToken';
 
-const App: React.FC = () => {
+interface AppProps {
+  MyProfileStore: MyProfileImpl;
+}
+
+const App: React.FC<AppProps> = (props) => {
+  const { claims } = useVerifyToken();
+
+  useEffect(() => {
+    props.MyProfileStore.getMyProfile(claims ?? null);
+  }, [claims]);
+
   return (
     <AppProvider theme={light}>
       <Routes>

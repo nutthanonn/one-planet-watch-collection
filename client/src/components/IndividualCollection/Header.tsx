@@ -23,7 +23,7 @@ const IndividualCollectionHeader: React.FC<IndividualCollectionHeaderProps> = (p
   return (
     <div>
       {props.image ? (
-        <Center>
+        <Center brand={props.brand}>
           <Img
             src={props.image}
             alt={props.id}
@@ -32,8 +32,8 @@ const IndividualCollectionHeader: React.FC<IndividualCollectionHeaderProps> = (p
             width={350}
           />
           <Box>
-            <Heading>{props.name}</Heading>
-            <Paragraph>{props.description}</Paragraph>
+            <Heading brand={props.brand}>{props.name}</Heading>
+            <Paragraph brand={props.brand}>{props.description}</Paragraph>
           </Box>
         </Center>
       ) : (
@@ -53,8 +53,10 @@ const Center = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
-  background: linear-gradient(13deg, rgba(27, 19, 19, 0.75) 0%, rgba(255, 255, 255, 1) 100%),
-    url('https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1933&q=80');
+  background: ${(props: { brand?: string }) =>
+    props.brand == 'PATEK PHILIPPE'
+      ? ''
+      : "linear-gradient(13deg, rgba(27, 19, 19, 0.75) 0%, rgba(255, 255, 255, 1) 100%),url('https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1933&q=80');"}
   background-size: cover;
   min-height: 70vh;
   align-items: center;
@@ -76,15 +78,15 @@ const Box = styled.div`
 `;
 
 const Heading = styled(H3)`
-  color: white;
+  color: ${(props: { brand?: string }) => (props.brand == 'PATEK PHILIPPE' ? 'black' : 'white')};
   font-weight: 600;
   font-size: 2rem;
 `;
 
 const Paragraph = styled.p`
   font-weight: 100;
-  color: white;
-  font-size: 1.5rem;
+  color: ${(props: { brand?: string }) => (props.brand == 'PATEK PHILIPPE' ? 'black' : 'white')};
+  font-size: 1rem;
   width: 30vw;
 
   @media only screen and (max-width: ${ScreenSize.tablet}) {

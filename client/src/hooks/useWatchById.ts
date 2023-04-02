@@ -4,7 +4,6 @@ import GetWatchByIdAPI, { WatchI } from '@api/GetWatchById';
 
 const useWatchById = () => {
   const { brand } = useParams();
-  console.log(brand);
   const [watch, setWatch] = useState<WatchI>();
 
   useEffect(() => {
@@ -14,8 +13,6 @@ const useWatchById = () => {
     }
     getWatch(brand as string);
   }, []);
-
-  console.log(watch);
 
   return { watch };
 };

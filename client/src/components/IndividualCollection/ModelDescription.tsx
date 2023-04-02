@@ -6,6 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { H4 } from '@common/Typography';
 
 interface ModelDescription {
+  brand?: string;
   sub_image?: string[];
   sub_description?: string[];
 }
@@ -21,7 +22,7 @@ const ModelDescription: React.FC<ModelDescription> = (props) => {
               alt='image'
               placeholderSrc={Skeleton}
               effect='blur'
-              width={600}
+              width={props.brand == 'RICHARD MILLE' ? 300 : 600}
             />
             <Heading>{props.sub_description}</Heading>
           </Box>

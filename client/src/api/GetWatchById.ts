@@ -27,8 +27,6 @@ const GetWatchByIdAPI = async (id: string) => {
     .then((res) => res.data)
     .catch((err) => err.response.data);
 
-  console.log(res);
-
   return res;
 };
 

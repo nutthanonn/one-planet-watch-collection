@@ -6,6 +6,7 @@ import BetaBanner from '@components/IndividualCollection/BetaBanner';
 import IndividualCollectionHeader from '@components/IndividualCollection/Header';
 import FavoriteCollection from '@components/IndividualCollection/FavoriteCollection';
 import ModelDescription from '@components/IndividualCollection/ModelDescription';
+import { MyProfileStore } from '@store/MyProfileStore';
 
 const IndividualCollection: React.FC = () => {
   const { watch } = useWatchById();
@@ -15,9 +16,13 @@ const IndividualCollection: React.FC = () => {
       <IndividualCollectionHeader {...watch} />
       <SpaceInline>
         <ModelTrend favorite={watch?.favorite} />
-        <FavoriteCollection />
+        <FavoriteCollection my_store={MyProfileStore} watch_id={watch?.id} />
       </SpaceInline>
-      <ModelDescription sub_description={watch?.sub_descriptions} sub_image={watch?.sub_images} />
+      <ModelDescription
+        sub_description={watch?.sub_descriptions}
+        sub_image={watch?.sub_images}
+        brand={watch?.brand}
+      />
       <BetaBanner />
     </div>
   );
