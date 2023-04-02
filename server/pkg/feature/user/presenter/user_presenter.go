@@ -17,6 +17,7 @@ type UserResponse struct {
 	Follower          []primitive.ObjectID `json:"follower" bson:"follower"`
 	Following         []primitive.ObjectID `json:"following" bson:"following"`
 	Verified          bool                 `json:"verified" bson:"verified"`
+	Favorite_List     []primitive.ObjectID `json:"favorite_list" bson:"favorite_list"`
 	MemberShip        bool                 `json:"membership" bson:"membership"`
 	Posts             []models.Post        `json:"posts" bson:"posts"`
 	CreateAt          time.Time            `json:"created_at,omitempty" bson:"created_at,omitempty"`
@@ -89,6 +90,7 @@ func (up *userPresenter) UserSeccessResponse(user *models.User) gin.H {
 			MemberShip:        user.MemberShip,
 			CreateAt:          user.CreateAt,
 			Posts:             user.Posts,
+			Favorite_List:     user.Favorite_List,
 		},
 	}
 }

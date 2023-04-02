@@ -15,14 +15,14 @@ func (fh *favoriteHandler) AddRemoveFavoriteHandler() gin.HandlerFunc {
 		bearerToken, err := helper.BearerToken(ctx.GetHeader("Authorization"))
 
 		if err != nil {
-			ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized", "error": err.Error()})
 			return
 		}
 
 		token, err := helper.VerifyToken(*bearerToken)
 
 		if err != nil {
-			ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized", "error": err.Error()})
 			return
 		}
 
@@ -31,17 +31,17 @@ func (fh *favoriteHandler) AddRemoveFavoriteHandler() gin.HandlerFunc {
 		user, err := user_repository.GetUserById(userID)
 
 		if err != nil || user == nil {
-			ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized", "error": err.Error()})
 			return
 		}
 
 		err = fh.favorite_repository.AddFavorite(userID, model_id)
 
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+			ctx.JSON(http.StatusInternalServerError, gin.H{"message": nil, "error": err.Error()})
 			return
 		}
 
-		ctx.JSON(http.StatusOK, gin.H{"message": "Success"})
+		ctx.JSON(http.StatusOK, gin.H{"message": "Success", "error": nil})
 	}
 }
