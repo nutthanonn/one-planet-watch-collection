@@ -20,18 +20,14 @@ func (pr *postRepository) CreatePost(userID string, post *models.Post) error {
 		return err
 	}
 
-	if post.Images == nil {
-		return errors.New("images is required")
+	for _, v := range post.Images {
+		if !helper.RegexCheckFormatImage(v) {
+			return errors.New("invalid image format")
+		}
 	}
 
 	if len(post.Images) > 10 {
 		return errors.New("maximum 10 images")
-	}
-
-	for _, image := range post.Images {
-		if !helper.ValidateBase64(image) {
-			return errors.New("invalid image format")
-		}
 	}
 
 	post.ID = primitive.NewObjectID()
