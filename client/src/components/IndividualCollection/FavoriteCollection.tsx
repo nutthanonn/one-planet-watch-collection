@@ -6,6 +6,7 @@ import { ScreenSize } from '@common/ScreenSize';
 import { MyProfileImpl } from '@store/MyProfileStore';
 import { observer } from 'mobx-react';
 import AddFavoriteAPI from '@api/AddFavorite';
+import { message } from 'antd';
 
 interface FavoriteCollectionProps {
   my_store: MyProfileImpl;
@@ -16,19 +17,28 @@ const FavoriteCollection: React.FC<FavoriteCollectionProps> = observer((props) =
   const [isActive, setIsActive] = useState<boolean>(false);
 
   useEffect(() => {
+    if (props.my_store.favorite_list == null) return;
+
     if (props.my_store.favorite_list.includes(props.watch_id as string)) {
       setIsActive(true);
     }
   }, [props.my_store.favorite_list, props.watch_id]);
 
-  const handleClick = () => {
-    setIsActive(!isActive);
-    if (isActive) {
-      props.my_store.removeFavoriteList(props.watch_id as string);
+  const handleClick = async () => {
+    const res = await AddFavoriteAPI(props.watch_id as string);
+
+    if (res.error == null) {
+      if (isActive) {
+        message.success('Removed from your collection list');
+        props.my_store.removeFavoriteList(props.watch_id as string);
+      } else {
+        message.success('Added to your collection list');
+        props.my_store.addFavoriteList(props.watch_id as string);
+      }
+      setIsActive(!isActive);
     } else {
-      props.my_store.addFavoriteList(props.watch_id as string);
+      message.error('Failed to add to your collection list');
     }
-    AddFavoriteAPI(props.watch_id as string);
   };
 
   return (

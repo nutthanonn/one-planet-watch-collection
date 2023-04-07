@@ -40,6 +40,7 @@ const UserCollection: React.FC<UserCollectionProps> = (props) => {
                 placeholderSrc={SkeletonBackground}
                 draggable={false}
                 width='100%'
+                height={400}
               />
             ))}
           </Col>
@@ -67,6 +68,9 @@ const Col = styled.div`
   }
   flex: 33%;
   padding: 0 4px;
+  > span {
+    margin-top: 8px;
+  }
 `;
 
 const Img = styled(LazyLoadImage)`
@@ -78,4 +82,8 @@ const Img = styled(LazyLoadImage)`
     cursor: pointer;
   }
   transition: all 0.25s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  vertical-align: middle;
+  width: 100%;
 `;
