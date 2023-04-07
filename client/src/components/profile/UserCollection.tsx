@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import SkeletonBackground from '@assets/images/skeleton-background.png';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import { ScreenSize } from '@common/ScreenSize';
-import type { Post } from '@interfaces/UserProfile';
+import type { Post, UserProfileI } from '@interfaces/UserProfile';
+import ModalPost from './ModalPost';
 
-interface UserCollectionProps {
+interface UserCollectionProps extends UserProfileI {
   posts: Post[];
+  isMe: boolean;
 }
 
 const UserCollection: React.FC<UserCollectionProps> = (props) => {
@@ -33,14 +32,15 @@ const UserCollection: React.FC<UserCollectionProps> = (props) => {
         {collections.map((collection, index) => (
           <Col key={index}>
             {collection.map((post) => (
-              <Img
+              <ModalPost
+                post_id={post.id}
+                description={post.description}
+                image={post.images}
                 key={post.id}
-                src={post.images[0]}
-                alt={post.description}
-                placeholderSrc={SkeletonBackground}
-                draggable={false}
-                width='100%'
-                height={400}
+                username={props.username}
+                avatar={props.avatar}
+                create_at={post?.created_at}
+                isMe={props.isMe}
               />
             ))}
           </Col>
@@ -71,19 +71,4 @@ const Col = styled.div`
   > span {
     margin-top: 8px;
   }
-`;
-
-const Img = styled(LazyLoadImage)`
-  margin-top: 8px;
-  vertical-align: middle;
-  object-fit: cover;
-  &:hover {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-  transition: all 0.25s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  vertical-align: middle;
-  width: 100%;
 `;

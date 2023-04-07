@@ -2,7 +2,9 @@ export interface Post {
   id: string;
   images: string[];
   description: string;
+  created_at?: string;
 }
+
 export interface UserProfileI {
   username: string;
   email: string;

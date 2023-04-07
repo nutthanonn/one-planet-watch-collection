@@ -19,7 +19,7 @@ const UserProfile: React.FC = () => {
         <>
           <UserBackground avatar={profile.avatar} background_profile={profile.background_profile} />
           <UserHeading {...profile} isMe={claims?.name === profile?.username} />
-          <UserCollection posts={profile.posts} />
+          <UserCollection {...profile} isMe={claims?.name === profile?.username} />
         </>
       ) : (
         <NotFound />
