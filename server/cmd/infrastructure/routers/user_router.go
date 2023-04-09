@@ -15,6 +15,7 @@ func (ar *appRouter) UserRouter(api *gin.RouterGroup) {
 	api.GET("/users/profile/:username", user_handler.GetUser())
 	api.GET("/users/verify/:token", user_handler.VerifiedUser())
 	api.GET("/users/sendmail", user_handler.SendMail())
+	api.GET("/users/check/role", user_handler.GetRoleHandler())
 
 	api.PATCH("/users/update", user_handler.UpdateUser())
 

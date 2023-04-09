@@ -12,6 +12,7 @@ type WatchPresenter interface {
 	WatchesSuccessResponse(data []*models.Watches) gin.H
 	WatchSuccessResponse(data *models.Watches) gin.H
 	WatchErrorResponse(err error) gin.H
+	BrandWatchSuccessResponse(data []*models.Watches) gin.H
 }
 
 func NewWatchPresenter() WatchPresenter {
@@ -58,6 +59,14 @@ func (wp *watchPresenter) WatchErrorResponse(err error) gin.H {
 }
 
 func (wp *watchPresenter) WatchSuccessResponse(data *models.Watches) gin.H {
+	return gin.H{
+		"status": "success",
+		"error":  nil,
+		"data":   data,
+	}
+}
+
+func (wp *watchPresenter) BrandWatchSuccessResponse(data []*models.Watches) gin.H {
 	return gin.H{
 		"status": "success",
 		"error":  nil,

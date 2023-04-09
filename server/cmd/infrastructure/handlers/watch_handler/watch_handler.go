@@ -16,8 +16,10 @@ type watchHandler struct {
 }
 
 type WatchHandler interface {
-	GetAllWatch() gin.HandlerFunc
 	GetWatchById() gin.HandlerFunc
+	GetWatchByBrand() gin.HandlerFunc
+	GetAllWatch() gin.HandlerFunc
+	DeleteWatchById() gin.HandlerFunc
 }
 
 func NewWatchHandler(mongo_database *mongo.Database, redis_client *redis.Client, repository repository.WatchRepository, presenter presenter.WatchPresenter) WatchHandler {
