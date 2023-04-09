@@ -18,7 +18,11 @@ const UserProfile: React.FC = () => {
       {profile?.username ? (
         <>
           <UserBackground avatar={profile.avatar} background_profile={profile.background_profile} />
-          <UserHeading {...profile} isMe={claims?.name === profile?.username} />
+          <UserHeading
+            {...profile}
+            isMe={claims?.name === profile?.username}
+            post={profile.posts.length}
+          />
           <UserCollection {...profile} isMe={claims?.name === profile?.username} />
         </>
       ) : (

@@ -13,6 +13,7 @@ interface UserHeadingProps {
   membership?: boolean;
   created_at?: Date;
   isMe?: boolean;
+  post: number;
 }
 
 const UserHeading: React.FC<UserHeadingProps> = (props) => {
@@ -40,7 +41,7 @@ const UserHeading: React.FC<UserHeadingProps> = (props) => {
       <SubHeading>
         <div>
           <Head>Post&nbsp;&nbsp;</Head>
-          <HeadData>10</HeadData>
+          <HeadData>{props.post}</HeadData>
         </div>
         <div>
           <Head>Created&nbsp;</Head>

@@ -4,14 +4,9 @@ import { SERVER_BASE_URL } from './defaultURL';
 axios.defaults.baseURL = SERVER_BASE_URL;
 
 export interface Response {
-  data: WatchData[];
+  data: Model[];
   error: string;
   status: string;
-}
-
-export interface WatchData {
-  brand: string;
-  models: Model[];
 }
 
 export interface Model {
@@ -26,15 +21,13 @@ export interface Model {
   favorite: string[];
 }
 
-const GetWatchesAPI = async () => {
+const GetAllWatchAPI = async () => {
   const res: Response = await axios
-    .get<Response>('/watches?q=20')
+    .get<Response>('/watches')
     .then((res) => res.data)
     .catch((err) => err.response.data);
-
-  console.log(res);
 
   return res;
 };
 
-export default GetWatchesAPI;
+export default GetAllWatchAPI;

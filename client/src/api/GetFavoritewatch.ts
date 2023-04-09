@@ -14,8 +14,6 @@ const GetFavoriteWatchAPI = async (watch_id: string[]) => {
     .then((res) => res.data)
     .catch((err) => err.response.data);
 
-  console.log(res);
-
   return res;
 };
 

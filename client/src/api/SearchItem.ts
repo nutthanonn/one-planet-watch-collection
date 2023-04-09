@@ -45,7 +45,6 @@ const SearchItemAPI = async (searchKey: string) => {
   const res: Response = await axios
     .get<Response>(`/search/user?q=${searchKey}`)
     .then((res) => {
-      console.log(res);
       return res.data;
     })
     .catch((err) => {

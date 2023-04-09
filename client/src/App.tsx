@@ -14,6 +14,8 @@ import IndividualCollection from '@pages/IndividualCollection';
 import NotFound from '@pages/NotFound';
 import { MyProfileImpl } from '@store/MyProfileStore';
 import useVerifyToken from '@hooks/useVerifyToken';
+import AdminDashBoard from '@pages/AdminDashBoard';
+import BrandCollection from '@pages/BrandCollection';
 
 interface AppProps {
   MyProfileStore: MyProfileImpl;
@@ -39,7 +41,10 @@ const App: React.FC<AppProps> = (props) => {
           <Route path='/model/:brand' element={<IndividualCollection />} />
           <Route path='/register/complete' element={<SuccessRegister />} />
           <Route path='*' element={<NotFound />} />
+          <Route path='/dashboard' element={<AdminDashBoard />} />
+          <Route path='/collection/:brand' element={<BrandCollection />} />
         </Route>
+        {/* <Route path='/dashboard/YWRtaW5pc3RyYXRvcg==' /> */}
       </Routes>
     </AppProvider>
   );

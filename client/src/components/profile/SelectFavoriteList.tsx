@@ -25,14 +25,16 @@ const SearchBar: React.FC<SearchBarProps> = observer((props) => {
   const debouncedSearchValue = useDebounce(searchValue, 500);
 
   const handleSetOptions = (item: Collection[]) => {
-    setOptions(
-      item.map((item) => {
-        return {
-          value: item.id,
-          label: <SearchItem {...item} />,
-        };
-      }),
-    );
+    if (item !== undefined) {
+      setOptions(
+        item.map((item) => {
+          return {
+            value: item.id,
+            label: <SearchItem {...item} />,
+          };
+        }),
+      );
+    }
   };
 
   useEffect(() => {
