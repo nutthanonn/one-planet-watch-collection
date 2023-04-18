@@ -46,6 +46,7 @@ func main() {
 		app_router.FollowRouter(api)
 		app_router.PostRouter(api)
 		app_router.FavoriteRouter(api)
+		app_router.RequestRouter(api)
 	}
 
 	app.Run(":8080")
