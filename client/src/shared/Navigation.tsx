@@ -5,14 +5,15 @@ import Logo from '@assets/images/one-planet-logo.svg';
 import { H3, H5 } from '@common/Typography';
 import { MenuOutlined } from '@ant-design/icons';
 import UserProfileDropdown from '@components/navigation/UserProfileDropdown';
-import ResourseDropdown from '@components/navigation/ResourseDropdown';
-import StatsDropdown from '@components/navigation/StatsDropdown';
 import { ScreenSize } from '@common/ScreenSize';
 import Sidebar from './Sidebar';
 import SearchBar from '@components/navigation/SearchBar';
+import useAdmin from '@hooks/useAdmin';
+import AdminDropdown from '@components/navigation/AdminDropdown';
 
 const Navigation: React.FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const { isAdmin } = useAdmin();
 
   const onClose = () => {
     setOpenDrawer(false);
@@ -37,8 +38,14 @@ const Navigation: React.FC = () => {
             <H5_Custom>
               <a href='/collection'>Collection</a>
             </H5_Custom>
-            <ResourseDropdown />
-            <StatsDropdown />
+            <H5_Custom>
+              <a href='/ranking'>Status</a>
+            </H5_Custom>
+            <H5_Custom>
+              <a href='/request'>Request</a>
+            </H5_Custom>
+            {isAdmin && <AdminDropdown />}
+            {/* <StatsDropdown /> */}
             <UserProfileDropdown />
           </Inline>
           <SidebarMobile>

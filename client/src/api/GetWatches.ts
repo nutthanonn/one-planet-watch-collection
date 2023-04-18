@@ -32,8 +32,6 @@ const GetWatchesAPI = async () => {
     .then((res) => res.data)
     .catch((err) => err.response.data);
 
-  console.log(res);
-
   return res;
 };
 

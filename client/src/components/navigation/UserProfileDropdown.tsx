@@ -3,7 +3,7 @@ import { Dropdown } from 'antd';
 import type { MenuProps } from 'antd';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { UserOutlined, HeartFilled, LogoutOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Cookies } from 'react-cookie';
 
 const DEFAILT_STYLE: React.CSSProperties = {
@@ -21,6 +21,7 @@ const UserProfileDropdown: React.FC = () => {
   const deleteCookie = () => {
     cookies.remove('token');
     navigate('/login');
+    window.location.reload();
   };
 
   const PROFILE_ITEMS: MenuProps['items'] = [
@@ -29,12 +30,6 @@ const UserProfileDropdown: React.FC = () => {
       label: <div onClick={() => navigate('/login')}>Profile</div>,
       style: DEFAILT_STYLE,
       icon: <UserOutlined style={{ fontSize: 20 }} />,
-    },
-    {
-      key: '2',
-      label: 'Favorites',
-      style: DEFAILT_STYLE,
-      icon: <HeartFilled style={{ fontSize: 20 }} />,
     },
   ];
 

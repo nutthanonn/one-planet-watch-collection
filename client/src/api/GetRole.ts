@@ -22,7 +22,11 @@ const GetRoleAPI = async () => {
     });
 
   if (res.role !== 'admin') {
+    if (window.origin === 'http://localhost:3000') {
+      return;
+    }
     window.location.href = '/';
+    return;
   }
 
   return res;
