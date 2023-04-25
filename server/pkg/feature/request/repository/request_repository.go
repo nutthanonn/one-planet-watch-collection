@@ -23,6 +23,7 @@ type RequestRepository interface {
 	DeleteRequest(req_id, user_id string) error
 	GetAllRequest(user_id string) ([]*models.RequestModel, error)
 	ReadMailRequest(req_id, user_id string) error
+	AcceptRequest(user_id, req_id string) error
 }
 
 func NewRequestRepository(mongo_database *mongo.Database, redis_client *redis.Client) RequestRepository {
@@ -71,10 +72,6 @@ func (sr *requestRepository) DeleteRequest(req_id, user_id string) error {
 		return errors.New("you are not admin")
 	}
 
-	if err != nil {
-		return err
-	}
-
 	objReqId, err := primitive.ObjectIDFromHex(req_id)
 
 	if err != nil {
@@ -83,7 +80,7 @@ func (sr *requestRepository) DeleteRequest(req_id, user_id string) error {
 
 	filter := bson.M{"_id": objReqId}
 
-	_, err = collection.DeleteOne(context.TODO(), filter)
+	_, err = collection.DeleteOne(context.Background(), filter)
 
 	if err != nil {
 		return err

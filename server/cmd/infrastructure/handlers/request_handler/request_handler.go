@@ -25,6 +25,7 @@ type RequestHandler interface {
 	DeleteRequest() gin.HandlerFunc
 	GetAllRequest() gin.HandlerFunc
 	ReadMailRequest() gin.HandlerFunc
+	AcceptRequest() gin.HandlerFunc
 }
 
 func NewRequestHandler(mongo_database *mongo.Database, redis_client *redis.Client, presenter presenter.RequestPresenter, repository repository.RequestRepository) RequestHandler {
@@ -74,7 +75,7 @@ func (ch *requestHandler) DeleteRequest() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		req_id := ctx.Param("req_id")
 
-		bearerToken, err := helper.BearerToken("Authorization")
+		bearerToken, err := helper.BearerToken(ctx.GetHeader("Authorization"))
 
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, ch.presenter.RequestErrorResponse(errors.New("Unauthorized")))
