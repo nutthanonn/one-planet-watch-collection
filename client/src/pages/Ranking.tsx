@@ -30,8 +30,6 @@ export default Ranking;
 const Container = styled.div`
   padding: 3rem;
   background-color: #ffffff;
-  background-image: radial-gradient(#000 0.5px, #ffff 0.5px);
-  background-size: 30px 30px;
 `;
 
 const HeadingTab = styled(H3)`

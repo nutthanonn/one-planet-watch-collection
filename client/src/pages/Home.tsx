@@ -8,9 +8,10 @@ import Text_collection_GSAP from '@gsap/landing/Text_collection_GSAP';
 import ActivateUser from '@components/landing/ActivateUser';
 import Banner from '@components/landing/Banner';
 import EndCredit from '@components/landing/EndCredit';
-import ImgSlide from '@components/landing/ImgSlide';
 import ImgSlide_GSAP from '@gsap/landing/ImgSlide_GSAP';
 import styled from 'styled-components';
+import Background_GSAP from '@gsap/landing/Background_GSAP';
+import Brand_name_GSAP from '@gsap/landing/Brand_name_GSAP';
 
 const Home: React.FC = () => {
   const root = useRef(null);
@@ -18,11 +19,12 @@ const Home: React.FC = () => {
   Brand_model_GSAP(root);
   Text_collection_GSAP(root);
   ImgSlide_GSAP(root);
+  Background_GSAP(root);
+  Brand_name_GSAP(root);
 
   return (
     <Box ref={root}>
       <Heading />
-      <ImgSlide />
       <ShowModel />
       <TextMakeCollection />
       <ActivateUser />
@@ -37,6 +39,4 @@ export default Home;
 const Box = styled.div`
   overflow: hidden;
   background-color: #ffffff;
-  background-image: radial-gradient(#000 0.5px, #ffff 0.5px);
-  background-size: 30px 30px;
 `;

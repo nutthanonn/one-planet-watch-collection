@@ -4,6 +4,7 @@ import Skeleton from '@assets/images/skeleton-background.png';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { H4 } from '@common/Typography';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface ModelDescription {
   brand?: string;
@@ -17,7 +18,7 @@ const ModelDescription: React.FC<ModelDescription> = (props) => {
       {props.sub_image ? (
         <Center>
           <Box>
-            <LazyLoadImage
+            <Img
               src={props.sub_image[0] ?? ''}
               alt='image'
               placeholderSrc={Skeleton}
@@ -41,6 +42,7 @@ const Center = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 5rem 0;
+  overflow: hidden;
 `;
 
 const Box = styled.div`
@@ -50,6 +52,11 @@ const Box = styled.div`
   border-radius: 10px;
   flex-direction: column;
   background-color: rgba(71, 96, 114, 0.05);
+  @media only screen and (max-width: ${ScreenSize.mobile}) {
+    > span {
+      width: 50vw;
+    }
+  }
 `;
 
 const Heading = styled(H4)`
@@ -58,3 +65,5 @@ const Heading = styled(H4)`
   text-align: center;
   line-height: 2rem;
 `;
+
+const Img = styled(LazyLoadImage)``;

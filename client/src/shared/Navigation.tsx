@@ -68,7 +68,7 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   z-index: 1000;
-  background: white;
+  background: rgba(255, 255, 255);
   @media only screen and (max-width: ${ScreenSize.mobile}) {
     padding: 0.5rem 1rem;
   }

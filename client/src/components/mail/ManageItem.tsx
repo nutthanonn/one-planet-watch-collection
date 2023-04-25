@@ -1,25 +1,47 @@
 import React from 'react';
-import { Popconfirm } from 'antd';
+import { message } from 'antd';
 import styled from 'styled-components';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import DeleteRequestAPI from '@api/DeleteRequest';
+import AcceptRequestAPI from '@api/AcceptRequest';
 
 interface ConfirmDeleteProps {
   id: string;
 }
 
 const ManageItem: React.FC<ConfirmDeleteProps> = (props) => {
+  const handleDecline = async () => {
+    const res = await DeleteRequestAPI(props.id);
+
+    if (res.error) {
+      message.error(res.error);
+      return;
+    }
+    message.success('Request declined');
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
+  const handleAccept = async () => {
+    const res = await AcceptRequestAPI(props.id);
+
+    if (res.error) {
+      message.error(res.error);
+      return;
+    }
+    message.success('Accept this request');
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
   return (
-    <Popconfirm
-      title='Delete model'
-      description='Are you sure to delete this?'
-      icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-      //   onConfirm={handleDelete}
-    >
-      <Flex>
-        <Delete>DECLINE</Delete>
-        <Accept>ACCEPT</Accept>
-      </Flex>
-    </Popconfirm>
+    <Flex>
+      <Delete onClick={handleDecline}>DECLINE</Delete>
+      <Accept onClick={handleAccept}>ACCEPT</Accept>
+    </Flex>
   );
 };
 

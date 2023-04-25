@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useAdmin from '@hooks/useAdmin';
 import useUserRequest from '@hooks/useUserRequest';
 import MailTable from '@components/mail/MailTable';
+import { Divider } from 'antd';
 
 const AdminMail: React.FC = () => {
   useAdmin();
@@ -11,6 +12,8 @@ const AdminMail: React.FC = () => {
 
   return (
     <Box>
+      <Heading>Admin Mail</Heading>
+      <Divider />
       <MailTable data={request} />
     </Box>
   );
@@ -24,4 +27,9 @@ const Box = styled.div`
   flex-direction: column;
   gap: 2rem;
   min-height: 80vh;
+`;
+
+const Heading = styled.h1`
+  font-size: 3rem;
+  font-weight: 700;
 `;

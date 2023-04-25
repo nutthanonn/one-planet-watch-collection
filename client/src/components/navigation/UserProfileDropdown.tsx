@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Cookies } from 'react-cookie';
+import Auth from '@api/Auth';
 
 const DEFAILT_STYLE: React.CSSProperties = {
   fontSize: '1rem',
@@ -20,14 +21,28 @@ const UserProfileDropdown: React.FC = () => {
 
   const deleteCookie = () => {
     cookies.remove('token');
-    navigate('/login');
-    window.location.reload();
+
+    setTimeout(() => {
+      navigate('/login');
+      window.location.reload();
+    }, 500);
+  };
+
+  const handleClick = async () => {
+    const res = await Auth();
+
+    if (res.error) {
+      navigate('/login');
+      return;
+    }
+
+    navigate(`/${res.claims.name}`);
   };
 
   const PROFILE_ITEMS: MenuProps['items'] = [
     {
       key: '1',
-      label: <div onClick={() => navigate('/login')}>Profile</div>,
+      label: <div onClick={handleClick}>Profile</div>,
       style: DEFAILT_STYLE,
       icon: <UserOutlined style={{ fontSize: 20 }} />,
     },
@@ -53,7 +68,7 @@ const UserProfileDropdown: React.FC = () => {
 
   return (
     <>
-      <Hover_div onClick={() => navigate('/login')}>
+      <Hover_div onClick={handleClick}>
         <Dropdown menu={{ items: profileItem }}>
           <UserCustom style={{ fontSize: 25 }} />
         </Dropdown>

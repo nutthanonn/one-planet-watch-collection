@@ -1,70 +1,115 @@
-import React, { useState } from 'react';
-import { Col, Row, Image } from 'antd';
-import Container from '@shared/Container';
-import { H4 } from '@common/Typography';
+import React from 'react';
 import styled from 'styled-components';
-import { WATCH_MOCK } from '@mocks/watch_mock';
+import RolexSVG from '@assets/images/rolex-logo.svg';
+import PatekSVG from '@assets/images/patek-philippe-logo.svg';
+import RichardMilleSVG from '@assets/images/richard-mille-logo.svg';
+
+import BackgroundLanding from '@assets/images/background-landing.png';
+import ExampleProfile from '@assets/images/example-profile.png';
 
 const ShowModel: React.FC = () => {
-  const [current_brand, setCurrentBrand] = useState<number>(0);
-  const brand_name = ['Rolex', 'Patek Philippe', 'Richard Mille', 'Daniel Wellington'];
-
   return (
-    <Container>
-      <Row justify='center' style={{ overflow: 'hidden' }}>
-        <Col span={12}>
-          <Center>
-            <Image
-              src={WATCH_MOCK[current_brand].img}
-              className='brand__model'
-              width={400}
-              alt='watch'
-            />
-          </Center>
-        </Col>
-        <Col span={12}>
-          <UL>
-            {brand_name.map((item, index) => {
-              return (
-                <LI key={index} curr={index === current_brand}>
-                  <span onClick={() => setCurrentBrand(index)}>
-                    <H4>{item}</H4>
-                  </span>
-                </LI>
-              );
-            })}
-          </UL>
-        </Col>
-      </Row>
-    </Container>
+    <Box>
+      <Background className='background__animate' />
+      <Heading>
+        <span className='title__1'>Your</span>
+        <span className='title__2'>watch</span>
+        <span className='title__3'>collection.</span>
+      </Heading>
+      <Square>
+        <SubHeading>
+          <div className='subtitle__animte1'>Discover</div>
+          <div className='subtitle__animte2'>the Top</div>
+          <div className='subtitle__animte3'>Brand</div>
+          <div className='subtitle__animte4'>for You</div>
+          <div className='subtitle__animte5'>Today!</div>
+        </SubHeading>
+        <Rolex src={RolexSVG} className='brand__animate' alt='brand' />
+        <Patek src={PatekSVG} className='brand__animate' alt='brand' />
+        <RichardMille src={RichardMilleSVG} className='brand__animate' />
+      </Square>
+    </Box>
   );
 };
 
 export default ShowModel;
 
-const UL = styled.ul`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
+const Box = styled.div`
+  height: 550vh;
+  clip-path: inset(0%);
+  background: black;
+`;
+
+const Background = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: ${`url(${BackgroundLanding})`};
+  width: 50%;
   height: 100%;
-  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 2;
 `;
 
-const LI = styled.li`
-  margin-bottom: 1.5rem;
-  color: ${(props: { curr: boolean }) => (props.curr ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 0.5)')};
-
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  width: fit-content;
+const Heading = styled.h1`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 7rem;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  gap: 1rem;
+  z-index: 2;
 `;
 
-const Center = styled.div`
-  width: 100%;
-
+const Square = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20rem;
+  height: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+`;
+
+const SubHeading = styled.h5`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6rem;
+  font-weight: 700;
+  padding: 2rem;
+  color: white;
+  > div {
+    opacity: 0;
+  }
+`;
+
+const BaseImage = styled.img`
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10rem;
+`;
+
+const Rolex = styled(BaseImage)``;
+
+const Patek = styled(BaseImage)`
+  /* transform: translate(-50%, -50%); */
+  left: -80%;
+`;
+
+const RichardMille = styled(BaseImage)`
+  /* transform: translate(-50%, -50%); */
+  left: 180%;
+  top: 70%;
 `;

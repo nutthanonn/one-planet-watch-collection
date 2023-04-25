@@ -21,7 +21,7 @@ interface MailTableProps {
 
 const columns: ColumnsType<DataType> = [
   {
-    title: 'Model',
+    title: 'Image',
     dataIndex: 'image',
     key: 'image',
     render: (text) => <Image src={text} alt='watch' draggable={false} width={40} />,
@@ -88,7 +88,7 @@ const MailTable: React.FC<MailTableProps> = (props) => {
             <Box>
               Selected {selectedRowKeys.length} items
               <Button type='dashed' danger>
-                READ ALL
+                READ
               </Button>
             </Box>
           ) : (

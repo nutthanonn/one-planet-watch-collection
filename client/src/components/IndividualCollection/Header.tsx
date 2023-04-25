@@ -56,7 +56,7 @@ const Center = styled.div`
   background: ${(props: { brand?: string }) =>
     props.brand == 'PATEK PHILIPPE'
       ? ''
-      : "linear-gradient(13deg, rgba(27, 19, 19, 0.75) 0%, rgba(255, 255, 255, 1) 100%),url('https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1933&q=80');"}
+      : "linear-gradient(13deg, rgba(27, 19, 19, 0.75) 0%, rgba(255, 255, 255, 1) 100%),url('https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1933&q=80');"};
   background-size: cover;
   min-height: 70vh;
   align-items: center;

@@ -7,7 +7,11 @@ const Heading: React.FC = () => {
   return (
     <BoxSticky className='landing__target'>
       <Center className='landing__watch'>
-        <H1_Custom>Watch Collection</H1_Custom>
+        <H1_Custom>
+          Watch
+          <br />
+          Collection
+        </H1_Custom>
         <H5_Custom>
           power by
           <span>
@@ -36,7 +40,9 @@ const Center = styled.div`
 `;
 
 const H1_Custom = styled(H1)`
-  font-size: 5rem;
+  font-size: 8rem;
+  text-align: center;
+  color: #1d1d1d;
 
   @media only screen and (max-width: ${ScreenSize.tablet}) {
     font-size: 3rem;
