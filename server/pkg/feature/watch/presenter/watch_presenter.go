@@ -15,6 +15,11 @@ type WatchPresenter interface {
 	BrandWatchSuccessResponse(data []*models.Watches) gin.H
 }
 
+type BrandWatchJSON struct {
+	Model   string            `json:"model"`
+	Watches []*models.Watches `json:"watches"`
+}
+
 func NewWatchPresenter() WatchPresenter {
 	return &watchPresenter{}
 }
@@ -67,9 +72,29 @@ func (wp *watchPresenter) WatchSuccessResponse(data *models.Watches) gin.H {
 }
 
 func (wp *watchPresenter) BrandWatchSuccessResponse(data []*models.Watches) gin.H {
+	var model []*BrandWatchJSON
+
+	for _, v := range data {
+		check := true
+		for _, k := range model {
+			if v.Model == k.Model {
+				check = false
+				k.Watches = append(k.Watches, v)
+				break
+			}
+		}
+
+		if check {
+			model = append(model, &BrandWatchJSON{
+				Model:   v.Model,
+				Watches: []*models.Watches{v},
+			})
+		}
+	}
+
 	return gin.H{
 		"status": "success",
 		"error":  nil,
-		"data":   data,
+		"data":   model,
 	}
 }

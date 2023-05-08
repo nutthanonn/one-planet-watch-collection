@@ -10,12 +10,31 @@ import (
 func (wr *watchRepository) GetWatchByBrand(brand string) ([]*models.Watches, error) {
 	watch_collection := wr.mongo_database.Collection("watches")
 
-	var watch_data []*models.Watches
+	var compare = map[string]string{
+		"rolex":             "ROLEX",
+		"patek-philippe":    "PATEK PHILLIPE",
+		"richard-mille":     "RICHARD MILLE",
+		"daniel-wellington": "DENIAL WELLINGTON",
+	}
 
+	brand = compare[brand]
+
+	var watch_data []*models.Watches
 	filter := bson.M{"brand": brand}
 
-	if err := watch_collection.FindOne(context.Background(), filter).Decode(&watch_data); err != nil {
+	cursor, err := watch_collection.Find(context.Background(), filter)
+
+	if err != nil {
 		return nil, err
+	}
+	defer cursor.Close(context.Background())
+
+	for cursor.Next(context.Background()) {
+		var watch models.Watches
+		if err := cursor.Decode(&watch); err != nil {
+			return nil, err
+		}
+		watch_data = append(watch_data, &watch)
 	}
 
 	return watch_data, nil
