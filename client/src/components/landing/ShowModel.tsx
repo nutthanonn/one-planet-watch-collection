@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import RolexSVG from '@assets/images/rolex-logo.svg';
 import PatekSVG from '@assets/images/patek-philippe-logo.svg';
+import RolexShowCase from '@assets/images/rolex-show-case.png';
 import RichardMilleSVG from '@assets/images/richard-mille-logo.svg';
 
 import BackgroundLanding from '@assets/images/background-landing.png';
-import ExampleProfile from '@assets/images/example-profile.png';
 
 const ShowModel: React.FC = () => {
   return (
@@ -28,6 +28,7 @@ const ShowModel: React.FC = () => {
         <Patek src={PatekSVG} className='brand__animate' alt='brand' />
         <RichardMille src={RichardMilleSVG} className='brand__animate' />
       </Square>
+      <RolexShowCaseStyle src={RolexShowCase} alt='rolex-showcase' className='rolex__showcase' />
     </Box>
   );
 };
@@ -35,7 +36,7 @@ const ShowModel: React.FC = () => {
 export default ShowModel;
 
 const Box = styled.div`
-  height: 550vh;
+  height: 600vh;
   clip-path: inset(0%);
   background: black;
 `;
@@ -112,4 +113,10 @@ const RichardMille = styled(BaseImage)`
   /* transform: translate(-50%, -50%); */
   left: 180%;
   top: 70%;
+`;
+
+const RolexShowCaseStyle = styled(BaseImage)`
+  opacity: 0;
+  width: 100%;
+  background-position: center;
 `;

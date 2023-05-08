@@ -70,7 +70,6 @@ const MailTable: React.FC<MailTableProps> = (props) => {
   }, [props]);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 

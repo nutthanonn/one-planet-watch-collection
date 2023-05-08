@@ -3,13 +3,18 @@ import { SERVER_BASE_URL } from '@config/BASE_URL';
 
 axios.defaults.baseURL = SERVER_BASE_URL;
 
-export interface Response {
-  data: WatchI;
-  error: string | null;
+interface Response {
+  data: WatchModel[];
+  error?: string;
   status: string;
 }
 
-export interface WatchI {
+interface WatchModel {
+  model: string;
+  watches: Watch[];
+}
+
+interface Watch {
   id: string;
   brand: string;
   model: string;
@@ -21,13 +26,13 @@ export interface WatchI {
   favorite: number;
 }
 
-const GetWatchByIdAPI = async (id: string) => {
+const GetWatchByBrandAPI = async (brand: string) => {
   const res: Response = await axios
-    .get<Response>(`/watches/${id}`)
+    .get<Response>(`/watches/brand?brand=${brand}`)
     .then((res) => res.data)
-    .catch((err) => err.response.data);
+    .catch((error) => error.response.data);
 
   return res;
 };
 
-export default GetWatchByIdAPI;
+export default GetWatchByBrandAPI;

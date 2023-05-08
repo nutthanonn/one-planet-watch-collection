@@ -12,6 +12,7 @@ import ImgSlide_GSAP from '@gsap/landing/ImgSlide_GSAP';
 import styled from 'styled-components';
 import Background_GSAP from '@gsap/landing/Background_GSAP';
 import Brand_name_GSAP from '@gsap/landing/Brand_name_GSAP';
+import Rolex_Showcase_GSAP from '@gsap/landing/Rolex_Showcase_GSAP';
 
 const Home: React.FC = () => {
   const root = useRef(null);
@@ -21,6 +22,7 @@ const Home: React.FC = () => {
   ImgSlide_GSAP(root);
   Background_GSAP(root);
   Brand_name_GSAP(root);
+  Rolex_Showcase_GSAP(root);
 
   return (
     <Box ref={root}>

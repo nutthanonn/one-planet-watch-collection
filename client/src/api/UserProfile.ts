@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SERVER_BASE_URL } from './defaultURL';
+import { SERVER_BASE_URL } from '@config/BASE_URL';
 import { UserProfileI } from '@interfaces/UserProfile';
 
 axios.defaults.baseURL = SERVER_BASE_URL;

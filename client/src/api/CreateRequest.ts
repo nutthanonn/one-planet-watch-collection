@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import { SERVER_BASE_URL } from './defaultURL';
+import { SERVER_BASE_URL } from '@config/BASE_URL';
 
 axios.defaults.baseURL = SERVER_BASE_URL;
 
@@ -19,8 +19,6 @@ interface Response {
 const CreateRequestAPI = async (data: RequestData) => {
   const cookies = new Cookies();
   const token = cookies.get('token');
-
-  console.log(token);
 
   const res: Response = await axios
     .post('/request', data, {

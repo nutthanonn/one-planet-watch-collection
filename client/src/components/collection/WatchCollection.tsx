@@ -5,21 +5,30 @@ import { H3 } from '@common/Typography';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { WatchData } from '@api/GetWatches';
+import { useNavigate } from 'react-router-dom';
 
 interface WatchCollectionProps {
   watch: WatchData[];
 }
 
 const WatchCollection: React.FC<WatchCollectionProps> = (props) => {
+  const navigate = useNavigate();
+
   return (
     <>
       {props.watch.map((item) => {
         return (
           <div key={item.brand}>
-            <Heading>
+            <Heading
+              onClick={() =>
+                navigate(`/collection/brand?q=${item.brand.toLowerCase().split(' ').join('-')}`)
+              }
+            >
               {item.brand} Collection
               <span>
-                <Link href='#'>View all</Link>
+                <Link href={`/collection/brand?q=${item.brand.toLowerCase().split(' ').join('-')}`}>
+                  View all
+                </Link>
               </span>
             </Heading>
             <Slide>
@@ -34,8 +43,12 @@ const WatchCollection: React.FC<WatchCollectionProps> = (props) => {
                   />
                 );
               })}
-              <Box>
-                <Tooltip placement='top' title='see more collection'>
+              <Box
+                onClick={() =>
+                  navigate(`/collection/brand?q=${item.brand.toLowerCase().split(' ').join('-')}`)
+                }
+              >
+                <Tooltip placement='top' title='More'>
                   <Arrow>
                     <CaretRightOutlined style={{ fontSize: 25, color: 'rgba(0,0,0,0.25)' }} />
                   </Arrow>
@@ -62,6 +75,7 @@ const Heading = styled(H3)`
   font-size: 2.5rem;
   font-weight: 600;
   text-transform: lowercase;
+  cursor: pointer;
   &::first-letter {
     text-transform: uppercase;
   }

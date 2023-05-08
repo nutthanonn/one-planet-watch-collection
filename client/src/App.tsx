@@ -48,7 +48,6 @@ const App: React.FC<AppProps> = (props) => {
           <Route path='/admin/mail' element={<AdminMail />} />
           <Route path='/collection/:brand' element={<BrandCollection />} />
         </Route>
-        {/* <Route path='/dashboard/YWRtaW5pc3RyYXRvcg==' /> */}
       </Routes>
     </AppProvider>
   );

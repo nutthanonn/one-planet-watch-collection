@@ -35,6 +35,7 @@ const RequestForm: React.FC = () => {
 
     if (res.error) {
       message.error(res.error);
+      return;
     }
 
     setValue({

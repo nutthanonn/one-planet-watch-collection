@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import { SERVER_BASE_URL } from './defaultURL';
+import { SERVER_BASE_URL } from '@config/BASE_URL';
 
 axios.defaults.baseURL = SERVER_BASE_URL;
 

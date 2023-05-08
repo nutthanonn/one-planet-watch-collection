@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Cookies } from 'react-cookie';
-import { SERVER_BASE_URL } from './defaultURL';
+import { CLIENT_BASE_URL, SERVER_BASE_URL } from '@config/BASE_URL';
 
 axios.defaults.baseURL = SERVER_BASE_URL;
 
@@ -22,10 +22,10 @@ const GetRoleAPI = async () => {
     });
 
   if (res.role !== 'admin') {
-    if (window.origin === 'http://localhost:3000') {
+    if (window.origin === CLIENT_BASE_URL) {
       return;
     }
-    window.location.href = '/';
+    window.location.href = CLIENT_BASE_URL;
     return;
   }
 
