@@ -20,6 +20,7 @@ type WatchHandler interface {
 	GetWatchByBrand() gin.HandlerFunc
 	GetAllWatch() gin.HandlerFunc
 	DeleteWatchById() gin.HandlerFunc
+	UpdateWatch() gin.HandlerFunc
 }
 
 func NewWatchHandler(mongo_database *mongo.Database, redis_client *redis.Client, repository repository.WatchRepository, presenter presenter.WatchPresenter) WatchHandler {

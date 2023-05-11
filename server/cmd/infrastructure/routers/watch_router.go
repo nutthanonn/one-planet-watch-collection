@@ -16,5 +16,7 @@ func (ar *appRouter) WatchRouter(api *gin.RouterGroup) {
 	api.GET("/watches/:id", watch_handler.GetWatchById())
 	api.GET("/watches/brand", watch_handler.GetWatchByBrand()) // ?brand=...
 
+	api.PUT("/watches/:id", watch_handler.UpdateWatch()) // only admin can update
 	api.DELETE("/watches/:watchID", watch_handler.DeleteWatchById())
+
 }

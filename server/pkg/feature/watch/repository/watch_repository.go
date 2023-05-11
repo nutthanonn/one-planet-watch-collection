@@ -17,6 +17,7 @@ type WatchRepository interface {
 	GetWatchByBrand(brand string) ([]*models.Watches, error)
 	DeleteWatchByID(watchID, userID string) error
 	CreateWatch(userId string, watchModel *models.Watches) error
+	UpdateWatch(user_id, watch_id string, data models.Watches) error
 }
 
 func NewWatchRepository(mongo_database *mongo.Database, redis_client *redis.Client) WatchRepository {
