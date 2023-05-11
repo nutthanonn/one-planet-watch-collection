@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { H3 } from '@common/Typography';
 import styled from 'styled-components';
 import { Divider, Tooltip } from 'antd';
@@ -17,6 +17,17 @@ interface UserHeadingProps {
 }
 
 const UserHeading: React.FC<UserHeadingProps> = (props) => {
+  const [copyState, setCopyState] = useState('Share Profile');
+
+  const handleClick = () => {
+    window.navigator.clipboard.writeText(window.location.href);
+    setCopyState('Copied!');
+
+    setTimeout(() => {
+      setCopyState('Share Profile');
+    }, 2000);
+  };
+
   return (
     <Box>
       <Flex>
@@ -33,8 +44,8 @@ const UserHeading: React.FC<UserHeadingProps> = (props) => {
           ) : (
             ''
           )}
-          <Tooltip placement='top' title='share profile'>
-            <ShareIcon />
+          <Tooltip placement='top' title={copyState}>
+            <ShareIcon onClick={handleClick} />
           </Tooltip>
         </FlexChild>
       </Flex>

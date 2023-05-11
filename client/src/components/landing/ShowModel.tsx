@@ -26,7 +26,7 @@ const ShowModel: React.FC = () => {
         </SubHeading>
         <Rolex src={RolexSVG} className='brand__animate' alt='brand' />
         <Patek src={PatekSVG} className='brand__animate' alt='brand' />
-        <RichardMille src={RichardMilleSVG} className='brand__animate' />
+        <RichardMille src={RichardMilleSVG} className='brand__animate' alt='brand' />
       </Square>
       <RolexShowCaseStyle src={RolexShowCase} alt='rolex-showcase' className='rolex__showcase' />
     </Box>
@@ -112,7 +112,7 @@ const Patek = styled(BaseImage)`
 const RichardMille = styled(BaseImage)`
   /* transform: translate(-50%, -50%); */
   left: 180%;
-  top: 70%;
+  top: 50%;
 `;
 
 const RolexShowCaseStyle = styled(BaseImage)`

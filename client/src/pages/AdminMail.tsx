@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-import useAdmin from '@hooks/useAdmin';
 import useUserRequest from '@hooks/useUserRequest';
 import MailTable from '@components/mail/MailTable';
 import { Divider } from 'antd';
+import useAdminPage from '@hooks/useAdminPage';
 
 const AdminMail: React.FC = () => {
-  useAdmin();
   const { request } = useUserRequest();
+  useAdminPage();
 
   return (
     <Box>

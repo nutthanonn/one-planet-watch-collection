@@ -1,12 +1,12 @@
 import React from 'react';
-import useAdmin from '@hooks/useAdmin';
 import AdminTable from '@components/admin/AdminTable';
 import styled from 'styled-components';
 import { H1 } from '@common/Typography';
 import { Divider } from 'antd';
+import useAdminPage from '@hooks/useAdminPage';
 
 const AdminDashBoard: React.FC = () => {
-  useAdmin();
+  useAdminPage();
   // const { allWatch } = useAllWatch();
 
   return (
