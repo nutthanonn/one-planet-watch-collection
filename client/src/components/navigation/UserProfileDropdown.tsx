@@ -58,7 +58,7 @@ const UserProfileDropdown: React.FC = () => {
           key: '4',
           label: <div onClick={() => deleteCookie()}>Logout</div>,
           style: DEFAILT_STYLE,
-          icon: <LogoutOutlined style={{ fontSize: 20 }} />,
+          icon: <LogoutOutlined style={{ fontSize: 20 }} onClick={() => deleteCookie()} />,
         },
       ]);
     } else {
