@@ -2,66 +2,97 @@ package repository
 
 import (
 	"context"
+	"encoding/json"
+	"reflect"
 	"time"
 
 	"github.com/one-planet/pkg/models"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func (sr *statsRepository) GetStatsEvery24Hours() ([]*models.Stats, error) {
 	watch_log_collection := sr.mongo_database.Collection("watch_log")
-	watch_collection := sr.mongo_database.Collection("watch")
+	watch_collection := sr.mongo_database.Collection("watches")
 	current_date := time.Now().UTC()
 
-	top_fav, err := watch_collection.Aggregate(context.TODO(), []bson.M{
-		{
-			"$sort": bson.M{
-				"fav_count": -1,
-			},
-		},
-		{
-			"$limit": 10,
-		},
+	findOptions := options.Find()
+	findOptions.SetSort(bson.M{
+		"favorite": -1,
 	})
+	findOptions.SetLimit(10)
+
+	cursor, err := watch_collection.Find(context.TODO(), bson.D{}, findOptions)
+	if err != nil {
+		return nil, err
+	}
+
+	var top_favorite_today_result []*models.Watches
+
+	for cursor.Next(context.TODO()) {
+		var watch_data models.Watches
+		if err := cursor.Decode(&watch_data); err != nil {
+			return nil, err
+		}
+		top_favorite_today_result = append(top_favorite_today_result, &watch_data)
+	}
+
+	stats := make([]*models.Stats, 0)
+
+	for _, v := range top_favorite_today_result {
+		id := v.ID.Hex()
+
+		filter := bson.M{
+			"watches_id": id,
+			"created_at": bson.M{
+				"$gte": current_date.AddDate(0, 0, -1),
+			},
+		}
+
+		count, err := watch_log_collection.Find(context.Background(), filter)
+
+		if err != nil {
+			return nil, err
+		}
+
+		change := 0
+		for count.Next(context.Background()) {
+			var watch_log models.Watch_Log
+			if err := count.Decode(&watch_log); err != nil {
+				return nil, err
+			}
+
+			if watch_log.Favorite {
+				change++
+			} else {
+				change--
+			}
+		}
+
+		percent_change := float64(v.Favorite+change) / float64(v.Favorite) * 100
+
+		if reflect.DeepEqual(v.Favorite, 0) {
+			percent_change = 0
+		}
+
+		if percent_change < 0 {
+			percent_change = percent_change * -1
+		}
+
+		// append to stats
+		stats = append(stats, &models.Stats{
+			Watch:      *v,
+			Percentage: percent_change,
+		})
+	}
+
+	marshal, err := json.Marshal(stats)
 
 	if err != nil {
 		return nil, err
 	}
 
-	var top_fav_result []*models.Watches
-
-	for top_fav.Next(context.Background()) {
-		var result models.Watches
-		if err := top_fav.Decode(&result); err != nil {
-			return nil, err
-		}
-		top_fav_result = append(top_fav_result, &result)
-	}
-
-	stats := []*models.Stats{}
-
-	for _, watch := range top_fav_result {
-		var stats_result models.Stats
-
-		log_filter := bson.M{
-			"watch_id": watch.ID,
-			"created_at": bson.M{
-				"$gte": current_date.AddDate(0, 0, -1),
-				"$lt":  current_date,
-			},
-		}
-
-		count, err := watch_log_collection.CountDocuments(context.Background(), log_filter)
-		if err != nil {
-			return nil, err
-		}
-
-		stats_result.Watch = *watch
-		stats_result.Percentage = (float64(count) / float64(watch.Favorite)) * 100
-	}
-
-	// set stats to redis
-	if err := sr.redis_client.Set("stats", stats, 0).Err(); err != nil {
+	if err := sr.redis_client.Set("stats", marshal, 0).Err(); err != nil {
 		return nil, err
 	}
 

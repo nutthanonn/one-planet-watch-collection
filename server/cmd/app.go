@@ -40,6 +40,7 @@ func main() {
 		app_router.UserRouter(api)
 		app_router.WatchRouter(api)
 		app_router.SearchRouter(api)
+		app_router.StatsRouter(api)
 
 		// token required (bearer token)
 		app_router.JWTRouter(api)
@@ -49,7 +50,6 @@ func main() {
 		app_router.PostRouter(api)
 		app_router.FavoriteRouter(api)
 		app_router.RequestRouter(api)
-		app_router.StatsRouter(api)
 	}
 
 	go func() {
