@@ -30,15 +30,18 @@ const BrandCardCollection: React.FC<BrandCardCollectionProps> = (props) => {
         </Center>
       ) : (
         <Grid>
-          {props.watches.map((watch) => (
-            <CardCollection
-              key={watch.id}
-              id={watch.id}
-              img={watch.image}
-              name={watch.name}
-              description={watch.description}
-            />
-          ))}
+          {props.watches.map((watch) => {
+            return (
+              <div key={watch.id}>
+                <CardCollection
+                  id={watch.id}
+                  img={watch.image}
+                  name={watch.name}
+                  description={watch.description}
+                />
+              </div>
+            );
+          })}
         </Grid>
       )}
     </div>
