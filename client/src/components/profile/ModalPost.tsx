@@ -77,6 +77,7 @@ export default ModalPost;
 const Box = styled.div`
   position: relative;
   margin-top: 10px;
+  border: 1px solid black;
 `;
 
 const DeleteIcon = styled(InfoCircleOutlined)`

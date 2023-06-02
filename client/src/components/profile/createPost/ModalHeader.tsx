@@ -4,13 +4,14 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 
 interface ModalHeaderProps {
   handleCloseModal: () => void;
+  title?: string;
 }
 
 const ModalHeader: React.FC<ModalHeaderProps> = (props) => {
   return (
     <Box>
       <Icon onClick={props.handleCloseModal} />
-      <Title>Craete Post</Title>
+      <Title>{props.title ?? 'Craete Post'}</Title>
       <Paragraph>{''}</Paragraph>
     </Box>
   );

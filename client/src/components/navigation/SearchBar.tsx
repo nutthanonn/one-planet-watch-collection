@@ -25,7 +25,15 @@ const SearchBar: React.FC = () => {
 
       const options = res.users.map((item) => ({
         value: item.username,
-        label: <SearchItem {...item} />,
+        label: (
+          <SearchItem
+            avatar={item.avatar}
+            username={item.username}
+            id={item.id}
+            bio={item.bio}
+            post={item.post?.length}
+          />
+        ),
       }));
 
       setOptions(options);

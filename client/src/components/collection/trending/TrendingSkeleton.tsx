@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Skeleton, Tag } from 'antd';
+import { Skeleton, Tag } from 'antd';
 import styled from 'styled-components';
 import SkeletonImage from 'antd/es/skeleton/Image';
 
@@ -15,25 +15,14 @@ const SkeletonTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {Array.from({ length: 5 }).map((item, index) => {
+          {Array.from({ length: 5 }).map((_, index) => {
             return (
               <Column key={index}>
                 <TD>
                   <Center>
-                    <div
-                      style={{
-                        width: '1rem',
-                        padding: '0 0.5rem',
-                        fontWeight: 300,
-                        fontSize: '1rem',
-                      }}
-                    ></div>
                     <SkeletonImage />
                     <div>
-                      <TextHeading></TextHeading>
-                      <Text>
-                        <Skeleton paragraph={{ rows: 1 }} />
-                      </Text>
+                      <Skeleton paragraph={{ rows: 1 }} />
                     </div>
                   </Center>
                 </TD>
@@ -41,7 +30,6 @@ const SkeletonTable: React.FC = () => {
                   <Tag color=''></Tag>
                 </TD>
                 <TD>
-                  <div style={{ textAlign: 'right' }}></div>
                   <Percent percent={0}>0</Percent>
                 </TD>
               </Column>
@@ -84,10 +72,6 @@ const Center = styled.div`
   justify-content: flex-start;
   font-size: 1.5rem;
   gap: 1rem;
-`;
-
-const ImageCustom = styled(Image)`
-  border-radius: 10px;
 `;
 
 const TextHeading = styled.p`
