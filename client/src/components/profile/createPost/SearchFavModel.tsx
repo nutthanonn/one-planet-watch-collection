@@ -7,16 +7,16 @@ import styled from 'styled-components';
 import useFavoriteWatch from '@hooks/useFavoriteWatch';
 import { MyProfileImpl } from '@store/MyProfileStore';
 import { observer } from 'mobx-react';
-import SearchItem from './SearchItem';
+import SearchItem from '../SearchItem';
 import { Collection } from '@interfaces/WatchApi';
 
-interface SearchBarProps {
+interface SearchFavModelProps {
   store: MyProfileImpl;
   AddPost: (watch: Collection) => void;
   selectFavoriteList: Collection[];
 }
 
-const SearchBar: React.FC<SearchBarProps> = observer((props) => {
+const SearchFavModel: React.FC<SearchFavModelProps> = observer((props) => {
   const { store } = props;
   const { watchData } = useFavoriteWatch(store.favorite_list);
 
@@ -82,13 +82,14 @@ const SearchBar: React.FC<SearchBarProps> = observer((props) => {
         placeholder={
           <div>
             <SearchOutlined />
-            <PlaceholderFull>Search Favorite</PlaceholderFull>
-            <PlaceholderShort>Search Favorite</PlaceholderShort>
+            <PlaceholderFull>Search favorite model</PlaceholderFull>
+            <PlaceholderShort>Search favorite model</PlaceholderShort>
           </div>
         }
         options={options}
         notFoundContent={'No results found'}
         allowClear
+        bordered={false}
         onSelect={handleSelect}
         value={searchValue}
       />
@@ -96,9 +97,10 @@ const SearchBar: React.FC<SearchBarProps> = observer((props) => {
   );
 });
 
-export default SearchBar;
+export default SearchFavModel;
 
 const PlaceholderFull = styled.span`
+  font-weight: 400;
   margin-left: 0.5rem;
   @media only screen and (max-width: 500px) {
     display: none;
@@ -106,6 +108,7 @@ const PlaceholderFull = styled.span`
 `;
 
 const PlaceholderShort = styled.span`
+  font-weight: 400;
   margin-left: 0.5rem;
   display: none;
   @media only screen and (max-width: 500px) {
@@ -114,7 +117,6 @@ const PlaceholderShort = styled.span`
 `;
 
 const InputGroup = styled(Input.Group)`
-  padding: 0 2.5rem;
   @media only screen and (max-width: ${ScreenSize.mobile}) {
     padding: 0;
   }

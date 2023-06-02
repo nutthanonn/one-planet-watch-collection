@@ -8,7 +8,6 @@ import SignIn from '@pages/SignIn';
 import SignUp from '@pages/SignUp';
 import SuccessRegister from '@pages/SuccessRegister';
 import Collection from '@pages/Collection';
-import Ranking from '@pages/Ranking';
 import UserProfile from '@pages/UserProfile';
 import IndividualCollection from '@pages/IndividualCollection';
 import NotFound from '@pages/NotFound';
@@ -38,7 +37,6 @@ const App: React.FC<AppProps> = (props) => {
           <Route path='/login' element={<SignIn />} />
           <Route path='/register' element={<SignUp />} />
           <Route path='/collection' element={<Collection />} />
-          <Route path='/ranking' element={<Ranking />} />
           <Route path='/request' element={<RequestModel />} />
           <Route path='/:username' element={<UserProfile />} />
           <Route path='/model/:brand' element={<IndividualCollection />} />

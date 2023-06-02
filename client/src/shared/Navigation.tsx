@@ -39,9 +39,6 @@ const Navigation: React.FC = () => {
               <a href='/collection'>Collection</a>
             </H5_Custom>
             <H5_Custom>
-              <a href='/ranking'>Status</a>
-            </H5_Custom>
-            <H5_Custom>
               <a href='/request'>Request</a>
             </H5_Custom>
             {isAdmin && <AdminDropdown />}
@@ -67,7 +64,7 @@ const Nav = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 90;
   background: rgba(255, 255, 255);
   @media only screen and (max-width: ${ScreenSize.mobile}) {
     padding: 0.5rem 1rem;

@@ -19,17 +19,21 @@ const WatchCollection: React.FC<WatchCollectionProps> = (props) => {
       {props.watch.map((item) => {
         return (
           <div key={item.brand}>
-            <Heading
-              onClick={() =>
-                navigate(`/collection/brand?q=${item.brand.toLowerCase().split(' ').join('-')}`)
-              }
-            >
-              {item.brand} Collection
-              <span>
-                <Link href={`/collection/brand?q=${item.brand.toLowerCase().split(' ').join('-')}`}>
-                  View all
-                </Link>
-              </span>
+            <Heading>
+              <ColorChange
+                onClick={() =>
+                  navigate(`/collection/brand?q=${item.brand.toLowerCase().split(' ').join('-')}`)
+                }
+              >
+                <span id='change__color'>{item.brand}</span> Collection
+              </ColorChange>
+              <ViewCategory
+                onClick={() =>
+                  navigate(`/collection/brand?q=${item.brand.toLowerCase().split(' ').join('-')}`)
+                }
+              >
+                View caterogy
+              </ViewCategory>
             </Heading>
             <Slide>
               {item.models.map((card, index) => {
@@ -71,26 +75,40 @@ const Box = styled.div`
 `;
 
 const Heading = styled(H3)`
-  padding: 1.5rem 3rem;
-  font-size: 2.5rem;
+  padding: 3.5rem 3rem 1rem 3rem;
+  font-size: 1.5rem;
   font-weight: 600;
   text-transform: lowercase;
-  cursor: pointer;
+
+  > span {
+    cursor: pointer;
+  }
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ColorChange = styled.span`
   &::first-letter {
     text-transform: uppercase;
   }
+  &:hover #change__color {
+    color: ${(props) => props.theme.colors.primary};
+    transition: all 0.2s ease-in-out;
+  }
 `;
 
-const Link = styled.a`
-  color: rgba(0, 0, 0, 0.5);
+const ViewCategory = styled.div`
+  background: none;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  height: 3rem;
   font-size: 1rem;
-  padding: 0 0 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &:hover {
-    color: rgba(0, 0, 0, 0.8);
-  }
-
-  transition: all 0.5s ease-in-out;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const Slide = styled.div`

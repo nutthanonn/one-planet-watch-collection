@@ -21,7 +21,7 @@ const CardCollection: React.FC<CardCollectionProps> = (props) => {
   return (
     <CardCustom
       hoverable
-      style={{ minWidth: 250 }}
+      style={{ minWidth: 250, overflow: 'hidden' }}
       onClick={() => navigate(`/model/${props.id}`)}
       cover={
         <Img
@@ -52,6 +52,12 @@ const CardCustom = styled(Card)`
     display: flex;
     justify-content: center;
   }
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  transition: all 0.25s ease-in-out;
 `;
 
 const Img = styled(LazyLoadImage)`

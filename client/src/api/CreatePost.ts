@@ -7,6 +7,7 @@ axios.defaults.baseURL = SERVER_BASE_URL;
 interface CreatePostProps {
   images: string[];
   description: string;
+  location: string;
 }
 
 interface Response {

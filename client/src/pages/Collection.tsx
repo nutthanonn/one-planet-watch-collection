@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import WatchCollection from '@components/collection/WatchCollection';
 import useWatches from '@hooks/useWatches';
 import { Empty } from 'antd';
+import Tab from '@components/collection/trending/Tab';
+import CarouselBox from '@components/collection/carousel/CarouselBox';
 
 const Collection: React.FC = () => {
   const { watch } = useWatches();
@@ -10,7 +12,11 @@ const Collection: React.FC = () => {
   return (
     <Box>
       {watch ? (
-        <WatchCollection watch={watch} />
+        <div>
+          <CarouselBox />
+          <Tab />
+          <WatchCollection watch={watch} />
+        </div>
       ) : (
         <Center>
           <Empty />
@@ -24,6 +30,7 @@ export default Collection;
 
 const Box = styled.div`
   min-height: 80vh;
+  overflow: hidden;
 `;
 
 const Center = styled.div`

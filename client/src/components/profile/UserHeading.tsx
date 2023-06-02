@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Divider, Tooltip } from 'antd';
 import { ShareAltOutlined } from '@ant-design/icons';
 import MemberShip from '@assets/images/membership.svg';
-import PostButton from './PostButton';
 import UpdateProfile from './update/UpdateProfile';
+import ModalCreatePost from './createPost/ModalCreatePost';
 
 interface UserHeadingProps {
   username: string;
@@ -38,7 +38,7 @@ const UserHeading: React.FC<UserHeadingProps> = (props) => {
         <FlexChild>
           {props.isMe ? (
             <Inline>
-              <PostButton />
+              <ModalCreatePost />
               <UpdateProfile {...props} />
             </Inline>
           ) : (

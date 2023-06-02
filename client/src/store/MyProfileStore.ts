@@ -5,6 +5,12 @@ import { makeAutoObservable } from 'mobx';
 export class MyProfileImpl {
   favorite_list: string[] = [];
 
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+  username: string = '';
+
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+  profile_avatar: string = '';
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -16,6 +22,8 @@ export class MyProfileImpl {
         return;
       }
       this.setFavoriteList(res.data.favorite_list);
+      this.username = res.data.username;
+      this.profile_avatar = res.data.avatar || '';
     }
   }
 
