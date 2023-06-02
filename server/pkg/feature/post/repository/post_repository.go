@@ -14,6 +14,7 @@ type postRepository struct {
 type PostRepository interface {
 	CreatePost(userID string, post *models.Post) error
 	DeletePost(userID, postID string) error
+	CreateComment(userID, postID string, comment *models.Comment) error
 }
 
 func NewPostRepository(mongo_database *mongo.Database, redis_client *redis.Client) PostRepository {

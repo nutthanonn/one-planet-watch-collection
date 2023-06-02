@@ -9,6 +9,7 @@ import (
 )
 
 type UserResponse struct {
+	ID                primitive.ObjectID   `json:"id,omitempty" bson:"_id,omitempty"`
 	Username          string               `json:"username,omitempty" bson:"username,omitempty"`
 	Email             string               `json:"email,omitempty" bson:"email,omitempty"`
 	Bio               string               `json:"bio,omitempty" bson:"bio,omitempty"`
@@ -79,6 +80,7 @@ func (up *userPresenter) UserSeccessResponse(user *models.User) gin.H {
 		"error":   false,
 		"message": "user data",
 		"data": &UserResponse{
+			ID:                user.ID,
 			Username:          user.Username,
 			Email:             user.Email,
 			Bio:               user.Bio,

@@ -14,6 +14,7 @@ func (ar *appRouter) PostRouter(api *gin.RouterGroup) {
 	post_handler := handler.NewPostHandler(ar.mongo_database, ar.redis_client, post_presenter, post_repository)
 
 	api.POST("/user/post", post_handler.CreatePost())
+	api.POST("/user/post/:post_id/:user_id/comment", post_handler.CreateComment())
 	api.DELETE("/user/post/:id", post_handler.DeletePost())
 
 }

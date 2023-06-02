@@ -6,10 +6,20 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+type Comment struct {
+	ID       primitive.ObjectID `json:"id" bson:"_id"`
+	Avatar   string             `json:"avatar" bson:"avatar"`
+	Username string             `json:"username" bson:"username"`
+	Content  string             `json:"content" bson:"content"`
+	CreateAt time.Time          `json:"created_at,omitempty" bson:"created_at,omitempty"`
+}
+
 type Post struct {
-	ID          primitive.ObjectID `json:"id" bson:"id"`
+	ID          primitive.ObjectID `json:"id" bson:"_id"`
 	Images      []string           `json:"images,omitempty" bson:"images,omitempty"`
 	Description string             `json:"description,omitempty" bson:"description,omitempty"`
+	Location    string             `json:"location,omitempty" bson:"location,omitempty"`
+	Comments    []Comment          `json:"comments,omitempty" bson:"comments,omitempty"`
 	CreateAt    time.Time          `json:"created_at,omitempty" bson:"created_at,omitempty"`
 }
 

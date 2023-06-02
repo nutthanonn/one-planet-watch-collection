@@ -18,6 +18,7 @@ type postHandler struct {
 type PostHandler interface {
 	CreatePost() gin.HandlerFunc
 	DeletePost() gin.HandlerFunc
+	CreateComment() gin.HandlerFunc
 }
 
 func NewPostHandler(mongo_database *mongo.Database, redis_client *redis.Client, presenter presenter.PostPresenter, repository repository.PostRepository) PostHandler {
