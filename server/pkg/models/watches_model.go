@@ -16,6 +16,7 @@ type Watches struct {
 	Sub_images       []string           `json:"sub_images,omitempty" bson:"sub_images,omitempty"`
 	Sub_descriptions []string           `json:"sub_descriptions,omitempty" bson:"sub_descriptions,omitempty"`
 	Favorite         int                `json:"favorite" bson:"favorite"`
+	Location         string             `json:"location,omitempty" bson:"location,omitempty"`
 }
 
 type Watch_Log struct {

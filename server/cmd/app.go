@@ -41,6 +41,7 @@ func main() {
 		app_router.WatchRouter(api)
 		app_router.SearchRouter(api)
 		app_router.StatsRouter(api)
+		app_router.LocationRouter(api)
 
 		// token required (bearer token)
 		app_router.JWTRouter(api)
@@ -59,7 +60,8 @@ func main() {
 			stats_repository.GetStatsEvery24Hours()
 
 			// Wait for 24 hours before querying data again
-			time.Sleep(24 * time.Hour)
+			// time.Sleep(24 * time.Hour)
+			time.Sleep(60 * time.Second)
 		}
 	}()
 

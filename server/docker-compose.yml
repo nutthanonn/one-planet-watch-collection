@@ -18,6 +18,7 @@ services:
       - JWT_SECRET=LJoDSv1ntuwkjyJXzGDev6LlVaX1cvE9AJsUnedAMVSJzFwTnB5RVA1KX6rE2Z6DEFhdpj1TZ_Z7r_Y1cSI19XTKPMydp7kJ6Fvf8Q4Ay3xF4xdmSd8hywNClUOSgRQh3NeEGl9HXSYf4nyC66gYHJqkflVWjNxyvRavcfomoccR1i1pQuj29dhLTXtzASIdLRPG_U6ia9FofdMM1LqBVNHdhJWzfJjmXNeO6ya3zKls6NwextQEzw8qVvGUiW7QJoEhmzFSo9Zfg_RJ0DN_5OBP3Z0JVbDV1RhSj2JibH8g3Ht8WNP5Lqp336dKELfdUuFGoO7TX9gaW1oWSHPpIQ
       - SERVER_BASE_URL=http://localhost:8080
       - CLIENT_BASE_URL=http://localhost:3000
+      - OPEN_CAGE_API_KEY=48cac7f0e1234c3db8a35a2641d32aa1
     networks:
       - my-network
 

@@ -12,9 +12,9 @@ func (wr *watchRepository) GetWatchByBrand(brand string) ([]*models.Watches, err
 
 	var compare = map[string]string{
 		"rolex":             "ROLEX",
-		"patek-philippe":    "PATEK PHILLIPE",
+		"patek-philippe":    "PATEK PHILIPPE",
 		"richard-mille":     "RICHARD MILLE",
-		"daniel-wellington": "DENIAL WELLINGTON",
+		"daniel-wellington": "DANIEL WELLINGTON",
 	}
 
 	brand = compare[brand]
