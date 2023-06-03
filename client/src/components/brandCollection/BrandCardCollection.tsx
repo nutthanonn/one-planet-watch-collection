@@ -38,6 +38,7 @@ const BrandCardCollection: React.FC<BrandCardCollectionProps> = (props) => {
                   img={watch.image}
                   name={watch.name}
                   description={watch.description}
+                  isBrandCollection={true}
                 />
               </div>
             );

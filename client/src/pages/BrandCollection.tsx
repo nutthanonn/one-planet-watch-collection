@@ -27,7 +27,6 @@ const BrandCollection: React.FC = () => {
   const [modelList, setModelList] = useState<string[]>([]);
 
   const [modelCtl, setModelCtl] = useState<Watch[]>([]);
-  const [searchKey, setSearchKey] = useState<string>('');
 
   useEffect(() => {
     if (watchModel) {
@@ -37,7 +36,6 @@ const BrandCollection: React.FC = () => {
   }, [watchModel]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKey(e.target.value);
     const filtered = watchModel
       .map((data) => data.watches)
       .flat()
@@ -108,4 +106,5 @@ const Grid = styled.div`
   grid-template-columns: 1fr 4fr;
   gap: 2rem;
   height: 80vh;
+  overflow: hidden;
 `;

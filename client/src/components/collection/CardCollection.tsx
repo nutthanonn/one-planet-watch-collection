@@ -13,6 +13,7 @@ interface CardCollectionProps {
   img: string;
   name: string;
   description: string;
+  isBrandCollection?: boolean;
 }
 
 const CardCollection: React.FC<CardCollectionProps> = (props) => {
@@ -21,7 +22,7 @@ const CardCollection: React.FC<CardCollectionProps> = (props) => {
   return (
     <CardCustom
       hoverable
-      style={{ minWidth: 250, overflow: 'hidden' }}
+      style={{ minWidth: 250, overflow: 'hidden', maxWidth: props.isBrandCollection ? 250 : '' }}
       onClick={() => navigate(`/model/${props.id}`)}
       cover={
         <Img

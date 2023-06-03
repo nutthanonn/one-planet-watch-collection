@@ -28,7 +28,7 @@ export const UpdateUserProfileAPI = async (data: UpdateUserProfileAPIProps) => {
   const token = cookies.get('token');
 
   const res: UserProfileUpdateResponse = await axios
-    .patch<UserProfileUpdateResponse>(`/users/update`, data, {
+    .patch(`/users/update`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -44,6 +44,8 @@ export const UpdateUserProfileAPI = async (data: UpdateUserProfileAPIProps) => {
     .catch((err) => {
       return err.response.data;
     });
+
+  console.log(res);
 
   return res;
 };
