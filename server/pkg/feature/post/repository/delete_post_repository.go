@@ -21,7 +21,7 @@ func (pr *postRepository) DeletePost(userID, postID string) error {
 	}
 
 	filter := bson.M{"_id": userObjectID}
-	update := bson.M{"$pull": bson.M{"posts": bson.M{"id": postObjectID}}}
+	update := bson.M{"$pull": bson.M{"posts": bson.M{"_id": postObjectID}}}
 
 	if _, err := user_collection.UpdateOne(context.TODO(), filter, update); err != nil {
 		return err
