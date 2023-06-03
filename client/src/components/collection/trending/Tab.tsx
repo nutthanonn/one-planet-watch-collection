@@ -28,6 +28,8 @@ export default Tab;
 const Container = styled.div`
   padding: 3rem;
   background-color: #ffffff;
+
+  overflow: scroll;
 `;
 
 const HeadingTab = styled(H3)`

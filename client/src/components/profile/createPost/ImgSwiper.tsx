@@ -11,6 +11,7 @@ import { Collection } from '@interfaces/WatchApi';
 import { H4 } from '@common/Typography';
 import { Empty } from 'antd';
 import { DeleteFilled } from '@ant-design/icons';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface ImgSwiperProps {
   collection: Collection[];
@@ -75,6 +76,11 @@ const Img = styled.div`
   background-size: contain;
   background-position: center;
   z-index: 2;
+
+  @media (max-width: ${ScreenSize.tablet}) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Title = styled(H4)`

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { CommentUser, Post } from '@interfaces/UserProfile';
 import { Avatar, Space } from 'antd';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface CommentBoxProps {
   post: Post;
@@ -54,6 +55,10 @@ export default CommentBox;
 const Box = styled.div`
   height: 24rem;
   overflow: scroll;
+
+  @media (max-width: ${ScreenSize.tablet}) {
+    height: 12rem;
+  }
 `;
 
 const Padding = styled.div`

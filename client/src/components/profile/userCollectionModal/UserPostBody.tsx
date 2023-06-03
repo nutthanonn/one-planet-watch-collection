@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Backdrop from '../createPost/Backdrop';
 import ModalHeader from '../createPost/ModalHeader';
 import { Post } from '@interfaces/UserProfile';
 import ImageSlider from './ImageSlider';
 import UserPostDescription from './UserPostDescription';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface UserPostBodyProps {
   handleCloseModal: () => void;
@@ -45,6 +46,11 @@ const Box = styled.div`
   width: 70rem;
   height: 35rem;
 
+  @media (max-width: ${ScreenSize.tablet}) {
+    width: 25rem;
+    height: 35rem;
+  }
+
   left: 50%;
   top: 50%;
   transform: translate(-50%, -55%);
@@ -58,4 +64,8 @@ const GridModal = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   height: 100%;
+
+  @media (max-width: ${ScreenSize.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `;

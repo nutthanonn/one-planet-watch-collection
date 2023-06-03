@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar, Space } from 'antd';
 import styled from 'styled-components';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface PostHeadingProps {
   username: string;
@@ -32,6 +33,10 @@ export default PostHeading;
 const Padding = styled.div`
   padding: 1rem;
   border-bottom: 1px solid #e8e8e8;
+
+  @media (max-width: ${ScreenSize.tablet}) {
+    padding-top: 0;
+  }
 `;
 
 const Center = styled.div`

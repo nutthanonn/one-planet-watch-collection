@@ -7,6 +7,7 @@ import ImgSwiper from './ImgSwiper';
 import { Collection } from '@interfaces/WatchApi';
 import CreatePostAPI from '@api/CreatePost';
 import { message } from 'antd';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface ModalBodyProps {
   handleCloseModal: () => void;
@@ -91,6 +92,12 @@ const Box = styled.div`
   width: 60rem;
   height: 30rem;
 
+  @media only screen and (max-width: ${ScreenSize.tablet}) {
+    width: 25rem;
+    height: 40rem;
+    grid-template-columns: 1fr;
+  }
+
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -104,4 +111,8 @@ const GridModal = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   height: 100%;
+
+  @media only screen and (max-width: ${ScreenSize.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `;

@@ -28,7 +28,7 @@ const UserPost: React.FC<UserPostProps> = (props) => {
   return (
     <div>
       <Box onClick={handleOpenModal}>
-        <Img src={props.post.images[0]} />
+        <Img src={props.post.images[0]} alt='preset-image' draggable={false} />
         {props.post.images.length > 1 ? <StackIcon /> : ''}
       </Box>
       {isModalOpen ? (

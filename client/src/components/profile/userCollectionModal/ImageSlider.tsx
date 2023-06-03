@@ -9,6 +9,7 @@ import 'swiper/css/pagination';
 
 import styled from 'styled-components';
 import { Post } from '@interfaces/UserProfile';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface ImageSliderProps {
   post: Post;
@@ -49,6 +50,11 @@ const SwiperSlideCustom = styled(SwiperSlide)`
   justify-content: center;
   padding-top: 4rem;
   position: relative;
+
+  @media (max-width: ${ScreenSize.tablet}) {
+    padding-top: 0;
+    height: 10rem;
+  }
 `;
 
 const Img = styled.div`
@@ -58,4 +64,9 @@ const Img = styled.div`
   background-size: contain;
   background-position: center;
   z-index: 2;
+
+  @media (max-width: ${ScreenSize.tablet}) {
+    width: 100%;
+    height: 100%;
+  }
 `;
