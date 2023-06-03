@@ -26,6 +26,7 @@ const UserCollection: React.FC<UserCollectionProps> = (props) => {
               avatar={avatar}
               location={post.location}
               user_id={id}
+              isMe={props.isMe}
             />
           );
         })}

@@ -5,7 +5,7 @@ import { SERVER_BASE_URL } from '@config/BASE_URL';
 axios.defaults.baseURL = SERVER_BASE_URL;
 
 interface Response {
-  status: number;
+  status: string;
   error: string;
 }
 
