@@ -23,12 +23,16 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 		return nil, errors.New("username is not allowed")
 	}
 
-	if ok := helper.ValidateBase64(updateData.Avatar); !ok && updateData.Avatar != "" {
-		return nil, errors.New("image is not base64")
+	if updateData.Avatar != helper.GetENV("DEFAULT_USER_PROFILE") {
+		if ok := helper.ValidateBase64(updateData.Avatar); !ok || updateData.Avatar != "" {
+			return nil, errors.New("image is not base64")
+		}
 	}
 
-	if ok := helper.ValidateBase64(updateData.BackgroundProfile); !ok && updateData.BackgroundProfile != "" {
-		return nil, errors.New("image is not base64")
+	if updateData.BackgroundProfile != helper.GetENV("DEFAULT_USER_BACKGROUND") {
+		if ok := helper.ValidateBase64(updateData.BackgroundProfile); !ok || updateData.BackgroundProfile != "" {
+			return nil, errors.New("image is not base64")
+		}
 	}
 
 	if err != nil {
@@ -53,11 +57,11 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 	}
 
 	if updateData.BackgroundProfile == "" {
-		updateData.BackgroundProfile = "https://source.unsplash.com/random/1200x400/?background-texture"
+		updateData.BackgroundProfile = helper.GetENV("DEFAULT_USER_BACKGROUND")
 	}
 
 	if updateData.Avatar == "" {
-		updateData.Avatar = "https://source.unsplash.com/random/1200x400/?background-texture"
+		updateData.Avatar = helper.GetENV("DEFAULT_USER_PROFILE")
 	}
 
 	updateData.Password = oldData.Password

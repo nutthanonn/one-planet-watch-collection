@@ -52,8 +52,8 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 	user.CreateAt = time.Now()
 	user.UpdatedAt = time.Now()
 	user.Verified = false
-	user.Avatar = "https://i.pinimg.com/474x/23/db/db/23dbdb7efd54729cb172ac1b7f2c4252.jpg"
-	user.BackgroundProfile = "https://images.unsplash.com/photo-1528460033278-a6ba57020470?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8YmFja2dyb3VuZC10ZXh0dXJlfHx8fHx8MTY4NTcyNTg4MQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200"
+	user.Avatar = helper.GetENV("DEFAULT_USER_PROFILE")
+	user.BackgroundProfile = helper.GetENV("DEFAULT_USER_BACKGROUND")
 	user.Password = password_hasing
 	user.Role = "user"
 	user.Follower = []primitive.ObjectID{}

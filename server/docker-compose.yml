@@ -19,6 +19,8 @@ services:
       - SERVER_BASE_URL=http://localhost:8080
       - CLIENT_BASE_URL=http://localhost:3000
       - OPEN_CAGE_API_KEY=48cac7f0e1234c3db8a35a2641d32aa1
+      - DEFAULT_USER_PROFILE=https://i.pinimg.com/474x/23/db/db/23dbdb7efd54729cb172ac1b7f2c4252.jpg
+      - DEFAULT_USER_BACKGROUND=https://images.unsplash.com/photo-1528460033278-a6ba57020470?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&ixid=MnwxfDB8MXxyYW5kb218MHx8YmFja2dyb3VuZC10ZXh0dXJlfHx8fHx8MTY4NTcyNTg4MQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200
     networks:
       - my-network
 
