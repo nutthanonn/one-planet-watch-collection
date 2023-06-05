@@ -2,10 +2,17 @@ import React from 'react';
 import { Drawer } from 'antd';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { HddOutlined, ToTopOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  HddOutlined,
+  MailOutlined,
+  PoweroffOutlined,
+  ToTopOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 
 interface SidebarProps {
   open: boolean;
+  isAdmin?: boolean;
   onClose: () => void;
 }
 
@@ -29,6 +36,19 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
     },
   ];
 
+  const AdminRoute = [
+    {
+      name: 'Dashboard',
+      value: 'dashboard',
+      icon: <PoweroffOutlined style={{ fontSize: '1.5rem' }} />,
+    },
+    {
+      name: 'mail',
+      value: 'admin/mail',
+      icon: <MailOutlined style={{ fontSize: '1.5rem' }} />,
+    },
+  ];
+
   const handleClick = (value: string) => {
     navigate(value);
     props.onClose();
@@ -45,6 +65,19 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             </Box>
           );
         })}
+
+        {props.isAdmin &&
+          AdminRoute.map((item, index) => {
+            return (
+              <Box key={index} onClick={() => handleClick(item.value)}>
+                {item.icon}
+                <Content>
+                  {item.name}
+                  <Span>Admin Only</Span>
+                </Content>
+              </Box>
+            );
+          })}
       </Drawer>
     </>
   );
@@ -71,4 +104,11 @@ const Box = styled.div`
 const Content = styled.div`
   font-size: 1rem;
   font-weight: 400;
+`;
+
+const Span = styled.span`
+  font-size: 0.8rem;
+  font-weight: 300;
+  padding: 1rem;
+  color: red;
 `;

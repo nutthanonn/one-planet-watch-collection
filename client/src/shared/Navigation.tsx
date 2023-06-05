@@ -47,7 +47,7 @@ const Navigation: React.FC = () => {
           </Inline>
           <SidebarMobile>
             <MenuOutlined size={25} onClick={() => setOpenDrawer(!openDrawer)} />
-            <Sidebar onClose={onClose} open={openDrawer} />
+            <Sidebar onClose={onClose} open={openDrawer} isAdmin={isAdmin} />
           </SidebarMobile>
         </InlineNav>
       </Nav>
