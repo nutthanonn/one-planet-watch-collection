@@ -30,6 +30,10 @@ func (wr *watchRepository) UpdateWatch(user_id, watch_id string, data models.Wat
 		return err
 	}
 
+	if data.Image == "" || data.Name == "" || data.Description == "" {
+		return errors.New("all fields are required")
+	}
+
 	filter := bson.M{"_id": objectID}
 	update := bson.M{"$set": data}
 

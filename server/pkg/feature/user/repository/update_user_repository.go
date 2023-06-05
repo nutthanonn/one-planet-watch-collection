@@ -24,13 +24,13 @@ func (ur *userRepository) UpdateUser(bearerToken *string, updateData *models.Use
 	}
 
 	if updateData.Avatar != helper.GetENV("DEFAULT_USER_PROFILE") {
-		if ok := helper.ValidateBase64(updateData.Avatar); !ok || updateData.Avatar != "" {
+		if ok := helper.ValidateBase64(updateData.Avatar); !ok && updateData.Avatar != "" {
 			return nil, errors.New("image is not base64")
 		}
 	}
 
 	if updateData.BackgroundProfile != helper.GetENV("DEFAULT_USER_BACKGROUND") {
-		if ok := helper.ValidateBase64(updateData.BackgroundProfile); !ok || updateData.BackgroundProfile != "" {
+		if ok := helper.ValidateBase64(updateData.BackgroundProfile); !ok && updateData.BackgroundProfile != "" {
 			return nil, errors.New("image is not base64")
 		}
 	}
