@@ -57,8 +57,8 @@ const SearchBar: React.FC = () => {
         placeholder={
           <div>
             <SearchOutlined />
-            <PlaceholderFull>Search Account</PlaceholderFull>
-            <PlaceholderShort>Search items</PlaceholderShort>
+            <PlaceholderFull>Find account</PlaceholderFull>
+            <PlaceholderShort>Find account</PlaceholderShort>
           </div>
         }
         options={options}

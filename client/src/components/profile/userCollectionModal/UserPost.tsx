@@ -6,6 +6,7 @@ import { EllipsisOutlined, SwitcherOutlined } from '@ant-design/icons';
 import ModalDelete from './ModalDelete';
 import DeletePostAPI from '@api/DeletePost';
 import { message } from 'antd';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface UserPostProps {
   post: Post;
@@ -98,6 +99,11 @@ const Box = styled.div`
   background-color: rgba(0, 0, 0, 0.02);
   overflow: hidden;
   position: relative;
+
+  @media only screen and (max-width: ${ScreenSize.mobile}) {
+    width: 15rem;
+    height: 15rem;
+  }
 
   cursor: pointer;
 

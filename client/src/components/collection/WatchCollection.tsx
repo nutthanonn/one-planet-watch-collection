@@ -6,6 +6,7 @@ import { CaretRightOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { WatchData } from '@api/GetWatches';
 import { useNavigate } from 'react-router-dom';
+import { ScreenSize } from '@common/ScreenSize';
 
 interface WatchCollectionProps {
   watch: WatchData[];
@@ -80,6 +81,10 @@ const Heading = styled(H3)`
   font-weight: 600;
   text-transform: lowercase;
 
+  @media only screen and (max-width: ${ScreenSize.mobile}) {
+    font-size: 1.25rem;
+  }
+
   > span {
     cursor: pointer;
   }
@@ -109,6 +114,11 @@ const ViewCategory = styled.div`
   align-items: center;
 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  @media only screen and (max-width: ${ScreenSize.mobile}) {
+    font-size: 0.75rem;
+    text-align: center;
+  }
 `;
 
 const Slide = styled.div`
