@@ -49,15 +49,6 @@ const UpdateProfile: React.FC<UpdateProfileProps> = (props) => {
       ...userForm,
     };
 
-    const default_picture = 'https://source.unsplash.com/random/1200x400/?background-texture';
-    if (form.avatar === default_picture) {
-      form.avatar = '';
-    }
-
-    if (userForm.background_profile === default_picture) {
-      form.background_profile = '';
-    }
-
     const res = await UpdateUserProfileAPI({ ...form, password });
 
     if (res.error === false) {
