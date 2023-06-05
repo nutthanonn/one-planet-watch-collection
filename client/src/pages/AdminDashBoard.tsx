@@ -1,9 +1,9 @@
 import React from 'react';
-import AdminTable from '@components/admin/AdminTable';
 import styled from 'styled-components';
 import { H1 } from '@common/Typography';
 import { Divider } from 'antd';
 import useAdminPage from '@hooks/useAdminPage';
+import AdminHeading from '@components/admin/AdminHeading';
 
 const AdminDashBoard: React.FC = () => {
   useAdminPage();
@@ -13,7 +13,7 @@ const AdminDashBoard: React.FC = () => {
     <Box>
       <Heading>Dashboard</Heading>
       <Divider />
-      <AdminTable />
+      <AdminHeading />
     </Box>
   );
 };

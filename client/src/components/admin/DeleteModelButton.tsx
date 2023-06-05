@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import DeleteWatchAPI from '@api/DeleteWatch';
 
-interface ConfirmDeleteProps {
+interface DeleteModelButtonProps {
   id: string;
 }
 
-const ConfirmDelete: React.FC<ConfirmDeleteProps> = (props) => {
+const DeleteModelButton: React.FC<DeleteModelButtonProps> = (props) => {
   const handleDelete = async () => {
     const res = await DeleteWatchAPI(props.id);
 
@@ -39,7 +39,7 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = (props) => {
   );
 };
 
-export default ConfirmDelete;
+export default DeleteModelButton;
 
 const Flex = styled.div`
   display: flex;
