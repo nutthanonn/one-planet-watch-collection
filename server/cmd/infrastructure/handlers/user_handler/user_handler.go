@@ -24,6 +24,8 @@ type UserHandler interface {
 	SendMail() gin.HandlerFunc
 	GetFavoriteWatch() gin.HandlerFunc
 	GetRoleHandler() gin.HandlerFunc
+	PasswordReset() gin.HandlerFunc
+	ForgotPassword() gin.HandlerFunc
 }
 
 func NewUserHandler(mongo_database *mongo.Database, redis_client *redis.Client, presenter presenter.UserPresenter, repository repository.UserRepository) UserHandler {

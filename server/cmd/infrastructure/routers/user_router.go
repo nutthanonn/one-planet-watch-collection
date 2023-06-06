@@ -22,4 +22,7 @@ func (ar *appRouter) UserRouter(api *gin.RouterGroup) {
 	api.POST("/users/register", user_handler.CreateUser())
 	api.POST("/users/login", user_handler.LoginUser())
 	api.POST("/users/favorite", user_handler.GetFavoriteWatch())
+
+	api.POST("/users/forgot/password", user_handler.ForgotPassword())
+	api.POST("/users/password/reset", user_handler.PasswordReset()) // req bearear token and password
 }

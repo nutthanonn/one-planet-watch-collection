@@ -4,13 +4,13 @@ import (
 	gomail "gopkg.in/gomail.v2"
 )
 
-func SendMail(email, link string) {
+func SendMail(title, description, email, link string) {
 	msg := gomail.NewMessage()
 	msg.SetHeader("From", "nutthanon.thon@kmutt.ac.th")
 	msg.SetHeader("To", email)
 	msg.SetHeader("Subject", "no-reply")
 
-	msg.SetBody("text/html", EmailGenerate(link))
+	msg.SetBody("text/html", EmailGenerate(title, description, link))
 
 	n := gomail.NewDialer("smtp.gmail.com", 587, "nutthanon.tho@gmail.com", GetENV("GOOGLE_APP_PASSWORD"))
 

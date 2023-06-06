@@ -84,7 +84,7 @@ func (ur *userRepository) CreateUser(user *models.User) (*string, error) {
 	}
 
 	link := helper.GetENV("SERVER_BASE_URL") + "/api/users/verify/" + token
-	helper.SendMail(user.Email, link)
+	helper.SendMail("Welcome To ONE PLANET Website", "You're receiving this email because you recently created a new account. If this wasn't you, please ignore this email.", user.Email, link)
 
 	return &returnToken, nil
 }

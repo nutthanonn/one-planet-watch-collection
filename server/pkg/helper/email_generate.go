@@ -1,6 +1,6 @@
 package helper
 
-func EmailGenerate(link string) string {
+func EmailGenerate(title, description, link string) string {
 	msg := `
     <!doctype html>
 <html>
@@ -361,13 +361,13 @@ func EmailGenerate(link string) string {
                       <h1 
                         style="text-align: center; font-size: 30px; font-weight: bold; color: #3498db; margin: 20px 0;"
                       >
-                            Welcome to ONE PLANET Website
+                            ` + title + `
                       </h1>
                         <h3>
                             Hi there,
                         </h3>
                         <p>
-                            You're receiving this email because you recently created a new account. If this wasn't you, please ignore this email.
+                            ` + description + `
                         </p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>

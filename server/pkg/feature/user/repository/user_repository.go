@@ -18,6 +18,8 @@ type UserRepository interface {
 	UpdateUser(bearerToken *string, updateData *models.UserUpdateModel) (*string, error)
 	LoginUser(user *models.UserLogin) (*string, error)
 	GetUserById(ID string) (*models.User, error)
+	PasswordReset(email, password string) error
+	ForgotPassword(username string) error
 }
 
 func NewUserRepository(mongo_database *mongo.Database, redis_client *redis.Client) UserRepository {

@@ -26,7 +26,7 @@ func (uh *userHandler) SendMail() gin.HandlerFunc {
 		}
 
 		link := helper.GetENV("SERVER_BASE_URL") + "/api/users/verify/" + *bearerToken
-		helper.SendMail(email, link)
+		helper.SendMail("Welcome To ONE PLANET Website", "You're receiving this email because you recently created a new account. If this wasn't you, please ignore this email.", email, link)
 
 		ctx.JSON(http.StatusOK, gin.H{"message": "Email sent"})
 	}
