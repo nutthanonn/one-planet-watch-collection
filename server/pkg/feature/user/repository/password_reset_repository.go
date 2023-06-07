@@ -25,5 +25,9 @@ func (ur *userRepository) PasswordReset(username, password string) error {
 		return err
 	}
 
+	if err := ur.redis_client.Del(user.ID.Hex()).Err(); err != nil {
+		return err
+	}
+
 	return nil
 }
