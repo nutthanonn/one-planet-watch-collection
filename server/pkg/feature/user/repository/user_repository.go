@@ -18,7 +18,7 @@ type UserRepository interface {
 	UpdateUser(bearerToken *string, updateData *models.UserUpdateModel) (*string, error)
 	LoginUser(user *models.UserLogin) (*string, error)
 	GetUserById(ID string) (*models.User, error)
-	PasswordReset(email, password string) error
+	PasswordReset(username, password string) error
 	ForgotPassword(username string) error
 }
 

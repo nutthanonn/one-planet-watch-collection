@@ -23,7 +23,7 @@ func (ur *userRepository) ForgotPassword(username string) error {
 		return errors.New("user not found")
 	}
 
-	token, err := helper.GenerateToken(5*time.Minute, "Password Reset", user.Email, "", false)
+	token, err := helper.GenerateToken(5*time.Minute, "Password Reset", "", user.Username, false)
 
 	if err != nil {
 		return err

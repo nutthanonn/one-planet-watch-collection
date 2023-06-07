@@ -40,7 +40,7 @@ func (uh *userHandler) PasswordReset() gin.HandlerFunc {
 			return
 		}
 
-		if err := uh.repository.PasswordReset(token["email"].(string), passwordReset.Password); err != nil {
+		if err := uh.repository.PasswordReset(token["name"].(string), passwordReset.Password); err != nil {
 			ctx.JSON(http.StatusBadRequest, uh.presenter.UserErrorResponse(err))
 			return
 		}

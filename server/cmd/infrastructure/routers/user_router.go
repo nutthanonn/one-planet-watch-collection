@@ -24,5 +24,5 @@ func (ar *appRouter) UserRouter(api *gin.RouterGroup) {
 	api.POST("/users/favorite", user_handler.GetFavoriteWatch())
 
 	api.POST("/users/forgot/password", user_handler.ForgotPassword())
-	api.POST("/users/password/reset", user_handler.PasswordReset()) // req bearear token and password
+	api.PATCH("/users/password/reset", user_handler.PasswordReset()) // req bearear token and password
 }
