@@ -20,8 +20,8 @@ const ActivateUser: React.FC = () => {
           </Col>
           <Col span={12}>
             <Statistic
-              title='Active Users'
-              value={12500}
+              title='Brand'
+              value={4}
               style={{ fontWeight: 'bold' }}
               valueStyle={{
                 fontWeight: 'bold',
@@ -30,7 +30,7 @@ const ActivateUser: React.FC = () => {
             />
             <Statistic
               title='Collection'
-              value={112893}
+              value={1953}
               style={{ fontWeight: 'bold' }}
               valueStyle={{ fontWeight: 'bold', fontSize: '3rem' }}
             />

@@ -20,18 +20,18 @@ const ModelTrend: React.FC<ModelTrendProps> = (props) => {
           <Circle />
           <Heading>Favorite this model</Heading>
         </Inline>
-        <Inline>
+        {/* <Inline>
           <LikeOutlined style={{ fontSize: '1.75rem' }} />
           <HeadingNumber>{props.favorite?.toLocaleString()}</HeadingNumber>
-        </Inline>
+        </Inline> */}
         <div>
-          <Inline>
+          {/* <Inline>
             <span style={{ fontSize: '1rem' }}>Trending</span>
             <Inline>
               <Triangle percent={MOCK.percent} />
               <TrendPercent percent={MOCK.percent}>{MOCK.percent}%</TrendPercent>
             </Inline>
-          </Inline>
+          </Inline> */}
         </div>
       </FlexCol>
     </div>

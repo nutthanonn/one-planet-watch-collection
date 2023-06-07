@@ -7,7 +7,6 @@ import AdminHeading from '@components/admin/AdminHeading';
 
 const AdminDashBoard: React.FC = () => {
   useAdminPage();
-  // const { allWatch } = useAllWatch();
 
   return (
     <Box>

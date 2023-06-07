@@ -17,6 +17,8 @@ import AdminDashBoard from '@pages/AdminDashBoard';
 import BrandCollection from '@pages/BrandCollection';
 import RequestModel from '@pages/RequestModel';
 import AdminMail from '@pages/AdminMail';
+import PasswordReset from '@pages/PasswordReset';
+import ForgotPassword from '@pages/ForgotPassword';
 
 interface AppProps {
   MyProfileStore: MyProfileImpl;
@@ -33,6 +35,7 @@ const App: React.FC<AppProps> = (props) => {
     <AppProvider theme={light}>
       <Routes>
         <Route path='/' element={<Layout />}>
+          <Route path='*' element={<NotFound />} />
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<SignIn />} />
           <Route path='/register' element={<SignUp />} />
@@ -41,10 +44,12 @@ const App: React.FC<AppProps> = (props) => {
           <Route path='/:username' element={<UserProfile />} />
           <Route path='/model/:brand' element={<IndividualCollection />} />
           <Route path='/register/complete' element={<SuccessRegister />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path='/password/reset/send' element={<SuccessRegister />} />
           <Route path='/dashboard' element={<AdminDashBoard />} />
           <Route path='/admin/mail' element={<AdminMail />} />
           <Route path='/collection/:brand' element={<BrandCollection />} />
+          <Route path='/password/reset/:token' element={<PasswordReset />} />
+          <Route path='/forgot/password' element={<ForgotPassword />} />
         </Route>
       </Routes>
     </AppProvider>

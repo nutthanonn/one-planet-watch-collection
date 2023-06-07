@@ -9,6 +9,7 @@ import SignInAPI from '@api/Sign-in';
 import useAuth from '@hooks/useAuth';
 import { Cookies } from 'react-cookie';
 import { LoadingOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 interface UserForm {
   username: string;
@@ -17,6 +18,7 @@ interface UserForm {
 
 const SignIn: React.FC = () => {
   useAuth();
+  const navigate = useNavigate();
   const cookie = new Cookies();
   const [waiting, setWaiting] = useState<boolean>(false);
   const [userForm, setUserForm] = useState<UserForm>({
@@ -83,7 +85,7 @@ const SignIn: React.FC = () => {
           required={true}
           error={errForm.password}
         />
-        <Forgot>
+        <Forgot onClick={() => navigate('/forgot/password')}>
           <H6>Forgot password?</H6>
         </Forgot>
         {waiting ? <LoadingOutlined /> : <BtnCustom htmlType='submit'>Login</BtnCustom>}
