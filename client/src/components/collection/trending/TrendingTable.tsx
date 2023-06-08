@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Tag } from 'antd';
 import styled from 'styled-components';
 import { DataPercentage } from '@api/GetTrending';
 import { BRAND_COLOR_MAP } from '@common/BrandColorMap';
 import { useNavigate } from 'react-router-dom';
+import { CaretDownOutlined } from '@ant-design/icons';
 
 interface TrendingTableProps {
   start_number: number;
@@ -12,6 +13,18 @@ interface TrendingTableProps {
 
 const TrendingTable: React.FC<TrendingTableProps> = (props) => {
   const navigate = useNavigate();
+  const [dataSort, setDataSort] = useState<DataPercentage[]>(props.data);
+  const [sortType, setSortType] = useState<boolean>(false);
+
+  const handleSort = () => {
+    if (sortType) {
+      setDataSort(props.data.sort((a, b) => a.watch.favorite - b.watch.favorite));
+      setSortType(false);
+    } else {
+      setDataSort(props.data.sort((a, b) => b.watch.favorite - a.watch.favorite));
+      setSortType(true);
+    }
+  };
 
   return (
     <>
@@ -20,11 +33,14 @@ const TrendingTable: React.FC<TrendingTableProps> = (props) => {
           <tr>
             <TH># &nbsp;&nbsp;&nbsp;&nbsp;Model</TH>
             <TH>Brand</TH>
-            <TH style={{ textAlign: 'right' }}>Favorite 24 hr.</TH>
+            <TH style={{ textAlign: 'right', cursor:"pointer" }} onClick={handleSort}>
+              Favorite 24 hr.
+              {sortType ? <CaretDownOutlined /> : <CaretDownOutlined rotate={180} />}
+            </TH>
           </tr>
         </thead>
         <tbody>
-          {props.data.map((item, index) => {
+          {dataSort.map((item, index) => {
             return (
               <Column key={index} onClick={() => navigate(`/model/${item.watch.id}`)}>
                 <TD>

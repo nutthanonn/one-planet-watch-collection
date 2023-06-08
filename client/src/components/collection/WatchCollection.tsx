@@ -33,7 +33,7 @@ const WatchCollection: React.FC<WatchCollectionProps> = (props) => {
                   navigate(`/collection/brand?q=${item.brand.toLowerCase().split(' ').join('-')}`)
                 }
               >
-                View caterogy
+                View category
               </ViewCategory>
             </Heading>
             <Slide>

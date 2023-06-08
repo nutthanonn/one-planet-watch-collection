@@ -40,7 +40,7 @@ const ManageItem: React.FC<ConfirmDeleteProps> = (props) => {
   return (
     <Flex>
       <Delete onClick={handleDecline}>DECLINE</Delete>
-      <Accept onClick={handleAccept}>ACCEPT</Accept>
+      <Accept onClick={handleAccept}>APPROVE</Accept>
     </Flex>
   );
 };
